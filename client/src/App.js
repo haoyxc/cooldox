@@ -1,13 +1,17 @@
 import React from "react";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Draft from "./components/Draft";
+import Register from "./containers/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">HELLO!</header>
-      <Draft />
-    </div>
+    <BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={Register} />
+      <Route path="/portal" exact component={Draft} />
+    </Switch>
+    </BrowserRouter>
   );
 }
 

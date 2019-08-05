@@ -9,17 +9,18 @@ import {
   Modifier
 } from "draft-js";
 
+import ColorControls from "./ColorControls";
+import colorStyleMap from "./ColorContainer/colorStyleMap";
+import FontSizeControls from "./FontSizeControls";
+import MutationControls from "./MutationControls";
+import Navbar from "./Navbar";
+
 function Draft() {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
-  const removeStyles = [];
-
-  const onBoldClick = () => {
-    setEditorState(editorState => RichUtils.toggleInlineStyle(editorState, "BOLD"));
+  const toggleInlineStyle = inlineStyle => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
-  const onItalicClick = () => {
-    setEditorState(editorState => RichUtils.toggleInlineStyle(editorState, "ITALIC"));
-  };
   // Beginning of paragraph alignment
   const onAlignmentClick = (style, removeStyles) => {
     const selection = editorState.getSelection();
@@ -73,19 +74,25 @@ function Draft() {
 
   return (
     <div className="draft-container">
-      <p>editor</p>
-      <button onClick={() => onBoldClick()}>Bold it</button>
-      <button onItalicClick={() => onItalicClick()}>Italic it</button>
-      <button onClick={() => onAlignmentClick("left", ["right", "center"])}>
-        <i class="fa fa-align-left" />
-      </button>
-      <button onClick={() => onAlignmentClick("center", ["right", "left"])}>
-        <i class="fa fa-align-center" />
-      </button>
-      <button onClick={() => onAlignmentClick("right", ["left", "center"])}>
-        <i class="fa fa-align-right" />
-      </button>
+      <Navbar />
+      <MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
+      <ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
+      <FontSizeControls editorState={editorState} onToggle={toggleInlineStyle} />
+      <div className="paragraph-controls">
+        <button onClick={() => onAlignmentClick("left", ["right", "center"])}>
+          <i class="fa fa-align-left" />
+        </button>
+        <button onClick={() => onAlignmentClick("center", ["right", "left"])}>
+          <i class="fa fa-align-center" />
+        </button>
+        <button onClick={() => onAlignmentClick("right", ["left", "center"])}>
+          <i class="fa fa-align-right" />
+        </button>
+      </div>
+
       <Editor
+        customStyleMap={colorStyleMap}
+        spellCheck={true}
         editorState={editorState}
         onChange={setEditorState}
         blockStyleFn={getBlockStyle}
