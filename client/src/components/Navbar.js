@@ -37,6 +37,7 @@ export default function Navbar() {
       setErrorMsg("Wrong username or password");
     } else {
       setLoggedIn(true);
+      return <Redirect to="/portal"/>
     }
   };
 
