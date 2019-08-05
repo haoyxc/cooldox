@@ -15,7 +15,6 @@ export default function Navbar() {
       setErrorMsg("Logout unsuccessful");
     } else {
       localStorage.setItem("token", "");
-      setLoggedIn(false);
       return <Redirect to="/" />;
     }
   };
