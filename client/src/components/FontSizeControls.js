@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InlineButton from './InlineButton';
-import fontSizes from './FontSizeContainer/fontSizes'
+import fontSizes from './Containers/fontSizes'
 
 function FontSizeControls(props) {
     const currentStyle = props.editorState.getCurrentInlineStyle();
