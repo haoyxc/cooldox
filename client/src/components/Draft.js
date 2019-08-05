@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
 import { Redirect } from "react-router-dom";
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  setBlockType,
-  ContentState,
-  SelectionState,
-  Modifier
-} from "draft-js";
-
 import ColorControls from "./ColorControls";
 import colorStyleMap from "./ColorContainer/colorStyleMap";
 import FontSizeControls from "./FontSizeControls";
 import MutationControls from "./MutationControls";
+import ListControls from './ListControls';
 import Navbar from "./Navbar";
 
 function Draft() {
@@ -22,6 +13,9 @@ function Draft() {
   const toggleInlineStyle = inlineStyle => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
+  const toggleBlockStyle = blockStyle => {
+    setEditorState(RichUtils.toggleBlockType(editorState, blockStyle));
+  }
 
   // Beginning of paragraph alignment
   const onAlignmentClick = (style, removeStyles) => {
@@ -91,7 +85,7 @@ function Draft() {
           <i class="fa fa-align-right" />
         </button>
       </div>
-
+      <ListControls editorState={editorState} onToggle={toggleBlockStyle}/>
       <Editor
         customStyleMap={colorStyleMap}
         spellCheck={true}
