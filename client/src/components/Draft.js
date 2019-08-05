@@ -4,6 +4,7 @@ import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
 import fontSizes from './FontSizeContainer/fontSizes';
 import FontSizeControls from './FontSizeControls';
+import MutationControls from './MutationControls';
 
 function Draft() {
 	const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
@@ -11,18 +12,6 @@ function Draft() {
 	const toggleInlineStyle = (inlineStyle) => {
 		setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
 	}
-
-	const onBoldClick = () => {
-		setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
-	};
-
-	const onItalicClick = () => {
-		setEditorState(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
-	};
-
-	const onUnderlineClick = () => {
-		setEditorState(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
-	};
 
 	const toggleColor = (toggledColor) => {
 		const selection = editorState.getSelection();
@@ -54,15 +43,10 @@ function Draft() {
 	return (
 		<div className="test">
 			<p>Editor</p>
-			<button onClick={() => onBoldClick()}>
-				<b>B</b>
-			</button>
-			<button onClick={() => onItalicClick()}>
-				<i>I</i>
-			</button>
-			<button onClick={() => onUnderlineClick()}>
-				<u>U</u>
-			</button>
+			<MutationControls 
+				editorState={editorState}
+				onToggle={toggleInlineStyle}
+			/>
 			<ColorControls editorState={editorState} onToggle={toggleColor} />
 			<FontSizeControls 
 				editorState={editorState}
