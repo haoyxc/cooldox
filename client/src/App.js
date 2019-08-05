@@ -11,7 +11,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Register} />
-        <Route path="/portal" exact component={DocumentEditor} />
+        <Route path="/portal" exact component={UserPortal} />
+        <Route path="/editor" exact component={DocumentEditor} />
       </Switch>
     </BrowserRouter>
   );
