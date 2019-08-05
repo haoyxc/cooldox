@@ -1,11 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Draft from "./components/Draft";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">HELLO!</header>
+      <Draft />
     </div>
   );
 }
