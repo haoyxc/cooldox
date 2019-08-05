@@ -62,7 +62,7 @@ export default function Navbar() {
         <a href="/" className="navbar-brand header-logo navbar-child">
           HORIZODOCZ
         </a>
-        {loggedIn ? (
+        {!loggedIn ? (
           <div className="login-wrapper navbar-child">
             <input
               type="text"
