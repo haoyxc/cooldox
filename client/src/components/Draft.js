@@ -5,43 +5,47 @@ import colorStyleMap from './ColorContainer/colorStyleMap';
 import fontSizes from './FontSizeContainer/fontSizes';
 import FontSizeControls from './FontSizeControls';
 import MutationControls from './MutationControls';
+import Navbar from "./Navbar";
 
 function Draft() {
-	const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
 
-	const toggleInlineStyle = (inlineStyle) => {
-		setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
-	}
+  const toggleInlineStyle = inlineStyle => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
+  };
 
 	const toggleColor = (toggledColor) => {
 		const selection = editorState.getSelection();
 
-		// Let's just allow one color at a time. Turn off all active colors.
-		const nextContentState = Object.keys(colorStyleMap).reduce((contentState, color) => {
-			return Modifier.removeInlineStyle(contentState, selection, color);
-		}, editorState.getCurrentContent());
 
-		let nextEditorState = EditorState.push(editorState, nextContentState, 'change-inline-style');
+    // Let's just allow one color at a time. Turn off all active colors.
+    const nextContentState = Object.keys(colorStyleMap).reduce((contentState, color) => {
+      return Modifier.removeInlineStyle(contentState, selection, color);
+    }, editorState.getCurrentContent());
 
-		const currentStyle = editorState.getCurrentInlineStyle();
+    let nextEditorState = EditorState.push(editorState, nextContentState, "change-inline-style");
 
-		// Unset style override for current color.
-		if (selection.isCollapsed()) {
-			nextEditorState = currentStyle.reduce((state, color) => {
-				return RichUtils.toggleInlineStyle(state, color);
-			}, nextEditorState);
-		}
+    const currentStyle = editorState.getCurrentInlineStyle();
 
-		// If the color is being toggled on, apply it.
-		if (!currentStyle.has(toggledColor)) {
-			nextEditorState = RichUtils.toggleInlineStyle(nextEditorState, toggledColor);
-		}
+    // Unset style override for current color.
+    if (selection.isCollapsed()) {
+      nextEditorState = currentStyle.reduce((state, color) => {
+        return RichUtils.toggleInlineStyle(state, color);
+      }, nextEditorState);
+    }
 
-		setEditorState(nextEditorState);
-	};
+    // If the color is being toggled on, apply it.
+    if (!currentStyle.has(toggledColor)) {
+      nextEditorState = RichUtils.toggleInlineStyle(nextEditorState, toggledColor);
+    }
 
-	return (
-		<div className="test">
+    setEditorState(nextEditorState);
+  };
+
+  return (
+    <div>
+      <Navbar />
+     	<div className="test">
 			<p>Editor</p>
 			<MutationControls 
 				editorState={editorState}
@@ -54,7 +58,8 @@ function Draft() {
 			/>
 			<Editor customStyleMap={colorStyleMap} editorState={editorState} onChange={setEditorState} spellCheck={true} />
 		</div>
-	);
+    </div>
+  );
 }
 
 export default Draft;
