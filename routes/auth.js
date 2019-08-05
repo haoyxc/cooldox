@@ -42,13 +42,7 @@ module.exports = function(passport, hash) {
       user: { username, _id }
     });
   });
-  // router.post("/login", passport.authenticate("local"), function(req, res) {
-  //   console.log("user is", req.user);
-  //   res.json({
-  //     success: true,
-  //     error: ""
-  //   });
-  // });
+
 
   // GET Logout page
   router.get("/logout", function(req, res) {
