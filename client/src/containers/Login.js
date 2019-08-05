@@ -5,6 +5,7 @@ export default function Login() {
   // Login states
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   const checkToken = () => {
     if (localStorage.getItem("token").length > 0) {
       return true;
@@ -42,37 +43,42 @@ export default function Login() {
       setErrorMsg("Wrong username or password");
     } else {
       localStorage.setItem("token", content.token);
+      setLoggedIn(true);
       console.log("Login successful");
     }
   };
 
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="username"
-        className="form-control mr-sm-2"
-        value={loginUser}
-        onChange={e => handleLoginUser(e)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        className="form-control mr-sm-2"
-        value={loginPass}
-        onChange={e => handleLoginPass(e)}
-      />
-      <button
-        onClick={() =>
-          postLogin().catch(e => {
-            setErrorMsg("Login request failed, please try again.");
-          })
-        }
-        className="login-btn"
-      >
-        Login
-      </button>
-      <Link to="/register">Register</Link>
-    </div>
-  );
+  if (loggedIn) {
+    return <Redirect to="/portal" />;
+  } else {
+    return (
+      <div>
+        <input
+          type="text"
+          placeholder="username"
+          className="form-control mr-sm-2"
+          value={loginUser}
+          onChange={e => handleLoginUser(e)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          className="form-control mr-sm-2"
+          value={loginPass}
+          onChange={e => handleLoginPass(e)}
+        />
+        <button
+          onClick={() =>
+            postLogin().catch(e => {
+              setErrorMsg("Login request failed, please try again.");
+            })
+          }
+          className="login-btn"
+        >
+          Login
+        </button>
+        <Link to="/register">Register</Link>
+      </div>
+    );
+  }
 }
