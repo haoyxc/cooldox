@@ -7,8 +7,12 @@ export default function Register() {
   const [regUser, setRegUser] = useState("");
   const [regPass, setRegPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  let checkToken = localStorage.getItem("token")
-
+  const checkToken = () => {
+    if (localStorage.getItem("token").length > 0){
+      return true
+    }
+    return false
+  }
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -56,7 +60,7 @@ export default function Register() {
     }
   };
 
-  if (checkToken){
+  if (checkToken()){
     return <Redirect to="/portal" />;
   } else {
     return (
