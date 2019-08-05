@@ -3,14 +3,31 @@ const router = express.Router();
 const { User } = require("../models/User");
 
 module.exports = function(passport, hash) {
-  router.post(
-    "/login",
+
+  router.post("/signup", (req, res) => {
+    console.log(req.body);
+    const newUser = new User({
+      username: req.body.username,
+      password: hash(req.body.password)
+    });
+    console.log(newUser);
+    newUser.save(function(err, result) {
+      if (err) {
+        res.json({ success: false, error: "Unable to save the user" });
+      } else {
+        res.json({ success: true, error: "" });
+      }
+    });
+  });
+
+  router.post("/login",
     passport.authenticate("local", {
       successRedirect: "/login/success",
       failureRedirect: "/login/failure"
       // failureFlash: true
     })
   );
+
   router.get("/login/failure", function(req, res) {
     res.status(401).json({
       success: false,
