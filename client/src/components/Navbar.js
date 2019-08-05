@@ -50,12 +50,15 @@ export default function Navbar() {
       method: "GET"
     });
     const content = await response.json();
+    console.log(content)
     if (!content.success) {
       setErrorMsg("Logout unsuccessful");
     } else {
       setLoggedIn(false);
+      localStorage.setItem("token",null)
     }
   };
+
 
   if (loggedIn) {
     return <Redirect to="/portal" />;
@@ -67,7 +70,7 @@ export default function Navbar() {
           <a href="/" className="navbar-brand header-logo navbar-child">
             HORIZODOCZ
           </a>
-          {!loggedIn ? (
+          {!checkToken ? (
             <div className="login-wrapper navbar-child">
               <input
                 type="text"
