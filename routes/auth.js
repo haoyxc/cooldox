@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 module.exports = function(passport, hash) {
@@ -37,9 +38,11 @@ module.exports = function(passport, hash) {
 
   router.get("/login/success", function(req, res) {
     const { username, _id } = req.user;
+    const token = jwt.sign({id: _id, username},process.env.SECRET)
     res.json({
       success: true,
-      user: { username, _id }
+      user: { username, _id },
+      token,
     });
   });
 
