@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 export default function Register() {
@@ -6,7 +7,8 @@ export default function Register() {
   const [regUser, setRegUser] = useState("");
   const [regPass, setRegPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  
+  let checkToken = localStorage.getItem("token")
+
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -54,7 +56,10 @@ export default function Register() {
     }
   };
 
-  return (
+  if (checkToken){
+    return <Redirect to="/portal" />;
+  } else {
+    return (
       <div>
           <Navbar />
           <div>
@@ -89,5 +94,7 @@ export default function Register() {
           </div>
       </div>
   )
+  }
+  
 
 }
