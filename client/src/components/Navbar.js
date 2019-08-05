@@ -93,7 +93,7 @@ export default function Navbar() {
             <button
               onClick={() =>
                 logout().catch(e => {
-                  setErrorMsg("Login request failed, please try again.");
+                  setErrorMsg("Logout request failed, please try again.");
                 })
               }
               className="login-btn"
