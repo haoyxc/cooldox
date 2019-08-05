@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 export default function Register() {
@@ -95,6 +95,7 @@ export default function Register() {
             <button onClick={() => submitRegister()} className="register-submit-btn">
               Submit
             </button>
+            <p>Already have an account?<Link to="/login"></Link> </p>
           </div>
       </div>
   )
