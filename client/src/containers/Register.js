@@ -30,6 +30,39 @@ export default function Register() {
     setLoginPass(event.target.value);
   };
 
+  // Handle Registration
+  const submitRegister = () => {
+    if (username.length === 0) {
+      setErrorMsg("Please enter a valid username");
+    } else if (password.length < 4) {
+      setErrorMsg("Please input a password of at least length 4");
+    } else if (password !== verifiedPassword) {
+      setErrorMsg("The passwords do not match");
+    } else {
+      postRegister().catch(event => {
+        setErrorMsg("Failed to create user, please try again.");
+        console.log(event);
+      });
+    }
+  };
+
+  const postRegister = async () => {
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: regUser,
+        password: regPass
+      })
+    });
+    const content = await response.json();
+    if (!content.success) {
+      setErrorMsg("Sorry, this user already exists");
+    }
+  };
+
 
   
 }
