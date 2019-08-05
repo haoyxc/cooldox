@@ -70,7 +70,6 @@ function Draft() {
 
   return (
     <div className="draft-container">
-      <Navbar />
       <MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
       <ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
       <FontSizeControls editorState={editorState} onToggle={toggleInlineStyle} />

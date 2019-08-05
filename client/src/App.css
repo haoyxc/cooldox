@@ -19,3 +19,10 @@
 .align-left div {
   text-align: left;
 }
+.fontsize-option {
+}
+.color-option {
+  padding: 1px;
+  background-color: gray;
+  border: solid 0.5px black;
+}
