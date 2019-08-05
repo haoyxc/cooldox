@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
 import { Redirect } from "react-router-dom";
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  setBlockType,
-  ContentState,
-  SelectionState,
-  Modifier
-} from "draft-js";
-
 import ColorControls from "./ColorControls";
 import colorStyleMap from "./ColorContainer/colorStyleMap";
 import FontSizeControls from "./FontSizeControls";
