@@ -7,12 +7,7 @@ export default function Register() {
   const [regUser, setRegUser] = useState("");
   const [regPass, setRegPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  const checkToken = () => {
-    if (localStorage.getItem("token").length > 0){
-      return true
-    }
-    return false
-  }
+ 
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -60,12 +55,9 @@ export default function Register() {
     }
   };
 
-  if (checkToken()){
-    return <Redirect to="/portal" />;
-  } else {
+
     return (
       <div>
-          <Navbar />
           <div>
             <h3>Register</h3>
             <hr />
@@ -99,7 +91,7 @@ export default function Register() {
           </div>
       </div>
   )
-  }
+  
   
 
 }
