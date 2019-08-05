@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
+import fontSizes from './FontSizeContainer/fontSizes';
+import FontSizeControls from './FontSizeControls';
 
 function Draft() {
 	const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+
+	const toggleInlineStyle = (inlineStyle) => {
+		setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
+	}
 
 	const onBoldClick = () => {
 		setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
@@ -58,7 +64,11 @@ function Draft() {
 				<u>U</u>
 			</button>
 			<ColorControls editorState={editorState} onToggle={toggleColor} />
-			<Editor customStyleMap={colorStyleMap} editorState={editorState} onChange={setEditorState} />
+			<FontSizeControls 
+				editorState={editorState}
+				onToggle={toggleInlineStyle}
+			/>
+			<Editor customStyleMap={colorStyleMap} editorState={editorState} onChange={setEditorState} spellCheck={true} />
 		</div>
 	);
 }
