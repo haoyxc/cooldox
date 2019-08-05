@@ -87,7 +87,7 @@ export default function Register() {
             <button onClick={() => submitRegister()} className="register-submit-btn">
               Submit
             </button>
-            <p>Already have an account?<Link to="/login"></Link> </p>
+            <p>Already have an account?<Link to="/login">Login</Link> </p>
           </div>
       </div>
   )
