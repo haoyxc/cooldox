@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const models = require("../models");
-const User = models.User;
-const Document = models.Document;
+const User = require("../models/User");
+const Document = require("../models/Document");
 
 // all routes after login
 router.get("/portals", (req, res) => {

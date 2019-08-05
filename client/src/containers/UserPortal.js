@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 export default function UserPortal() {
   const getPortals = async () => {
@@ -9,5 +10,10 @@ export default function UserPortal() {
       console.log(e);
     }
   };
-  return <div>hello this is the userportal</div>;
+  return (
+    <div>
+      <button>New Document</button>
+      hello this is the userportal
+    </div>
+  );
 }
