@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Draft from "./components/Draft";
 import Register from "./containers/Register";
@@ -7,8 +7,10 @@ import Register from "./containers/Register";
 function App() {
   return (
     <BrowserRouter>
-      <Route to="/" exact={true} component={Register} />
-      <Route to="/portal" exact={true} component={Draft} />
+    <Switch>
+      <Route path="/" exact component={Register} />
+      <Route path="/portal" exact component={Draft} />
+    </Switch>
     </BrowserRouter>
   );
 }
