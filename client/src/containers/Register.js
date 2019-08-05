@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-
 export default function Register() {
   // Registration states
   const [regUser, setRegUser] = useState("");
@@ -62,40 +61,39 @@ export default function Register() {
     return <Redirect to="/login" />;
   }
   return (
-    <div>
-      <div>
-        <h3>Register</h3>
-        <hr />
-        <p>{errorMsg}</p>
+    <div className="main">
+      <p className="sign" style={{textAlign:"center"}}>Register</p>
+      <p>{errorMsg}</p>
+      <form class="form1">
         <input
+          className="un "
           type="text"
-          className="form-control"
           placeholder="username"
           value={regUser}
           onChange={e => handleRegUser(e)}
         />
         <input
           type="password"
-          className="form-control"
+          className="pass"
           placeholder="password"
           value={regPass}
           onChange={e => handleRegPass(e)}
         />
         <input
           type="password"
-          className="form-control"
+          className="pass"
           placeholder="verify password"
           value={repeatPass}
           onChange={e => handleRepeatPass(e)}
         />
         <br />
-        <button onClick={() => submitRegister()} className="register-submit-btn">
+        <button onClick={() => submitRegister()} className="submit">
           Submit
         </button>
-        <p>
-          Already have an account?<Link to="/login">Login</Link>
+        <p className="forgot" style={{textAlign:"center"}}>
+          Already have an account?<Link to="/login"><strong><i> Login</i></strong></Link>
         </p>
-      </div>
+      </form>
     </div>
   );
 }
