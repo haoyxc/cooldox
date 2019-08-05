@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 export default function Navbar() {
   const [errorMsg, setErrorMsg] = useState("");
-
+  const [logoutPress, setLogoutPress] = useState(false);
   // Handle Logout
   const logout = async () => {
     const response = await fetch("http://localhost:4000/logout", {
@@ -15,9 +15,13 @@ export default function Navbar() {
       setErrorMsg("Logout unsuccessful");
     } else {
       localStorage.setItem("token", "");
-      return <Redirect to="/" />;
+      setLogoutPress(true);
     }
-  };
+  };    
+
+  if(logoutPress){
+      return <Redirect to="/"/>
+  }
 
   return (
     <div>
