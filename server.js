@@ -64,13 +64,11 @@ function hashPassword(password) {
   
   // Passport Serialize
   passport.serializeUser(function(user, done) {
-    console.log("Hi i'm in serialize", user);
     done(null, user._id);
   });
   
   // Passport Deserialize
   passport.deserializeUser(function(id, done) {
-    console.log("Hi i'm in deserialize", id);
     User.findById(id, function(err, user) {
       console.log(user);
       done(err, user);

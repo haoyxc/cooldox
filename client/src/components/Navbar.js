@@ -22,6 +22,8 @@ export default function Navbar() {
   const postLogin = async () => {
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
+      credentials: "include",
+      redirect: "follow",
       headers: {
         "Content-Type": "application/json"
       },
@@ -36,6 +38,7 @@ export default function Navbar() {
       setErrorMsg("Wrong username or password");
     } else {
       setLoggedIn(true);
+      console.log("Login successful")
       return <Redirect to="/portal"/>
     }
   };
