@@ -14,6 +14,7 @@ function App() {
         <Route path="/login" exact component={Login}/>
         <Route path="/portal" exact component={UserPortal} />
         <Route path="/editor" exact component={DocumentEditor}/>
+
       </Switch>
     </BrowserRouter>
   );
