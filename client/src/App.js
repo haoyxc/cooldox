@@ -7,7 +7,7 @@ import Register from "./containers/Register";
 function App() {
   return (
     <BrowserRouter>
-      <Route to="/" exact={true} component={Register} />
+      <Route to="/register" component={Register} />
       <Route to="/portal" exact={true} component={Draft} />
     </BrowserRouter>
   );
