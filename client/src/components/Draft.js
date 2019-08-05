@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
-import fontSizes from './FontSizeContainer/fontSizes';
 import FontSizeControls from './FontSizeControls';
 import MutationControls from './MutationControls';
 import Navbar from "./Navbar";
@@ -14,34 +13,6 @@ function Draft() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
-	const toggleColor = (toggledColor) => {
-		const selection = editorState.getSelection();
-
-
-    // Let's just allow one color at a time. Turn off all active colors.
-    const nextContentState = Object.keys(colorStyleMap).reduce((contentState, color) => {
-      return Modifier.removeInlineStyle(contentState, selection, color);
-    }, editorState.getCurrentContent());
-
-    let nextEditorState = EditorState.push(editorState, nextContentState, "change-inline-style");
-
-    const currentStyle = editorState.getCurrentInlineStyle();
-
-    // Unset style override for current color.
-    if (selection.isCollapsed()) {
-      nextEditorState = currentStyle.reduce((state, color) => {
-        return RichUtils.toggleInlineStyle(state, color);
-      }, nextEditorState);
-    }
-
-    // If the color is being toggled on, apply it.
-    if (!currentStyle.has(toggledColor)) {
-      nextEditorState = RichUtils.toggleInlineStyle(nextEditorState, toggledColor);
-    }
-
-    setEditorState(nextEditorState);
-  };
-
   return (
     <div>
       <Navbar />
@@ -51,7 +22,7 @@ function Draft() {
 				editorState={editorState}
 				onToggle={toggleInlineStyle}
 			/>
-			<ColorControls editorState={editorState} onToggle={toggleColor} />
+			<ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
 			<FontSizeControls 
 				editorState={editorState}
 				onToggle={toggleInlineStyle}
