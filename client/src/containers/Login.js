@@ -41,7 +41,6 @@ export default function Login() {
     if (!content.success) {
       setErrorMsg("Wrong username or password");
     } else {
-      setLoggedIn(true);
       localStorage.setItem("token", content.token)
       console.log("Login successful");
     }
