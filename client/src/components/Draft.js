@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
-import ColorControls from "./ColorControls";
-import colorStyleMap from "./ColorContainer/colorStyleMap";
-import fontSizes from "./FontSizeContainer/fontSizes";
-import FontSizeControls from "./FontSizeControls";
+import React, { useState } from 'react';
+import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import ColorControls from './ColorControls';
+import colorStyleMap from './ColorContainer/colorStyleMap';
+import fontSizes from './FontSizeContainer/fontSizes';
+import FontSizeControls from './FontSizeControls';
+import MutationControls from './MutationControls';
 import Navbar from "./Navbar";
 
 function Draft() {
@@ -13,20 +14,9 @@ function Draft() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
-  const onBoldClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
-  };
+	const toggleColor = (toggledColor) => {
+		const selection = editorState.getSelection();
 
-  const onItalicClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
-  };
-
-  const onUnderlineClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
-  };
-
-  const toggleColor = toggledColor => {
-    const selection = editorState.getSelection();
 
     // Let's just allow one color at a time. Turn off all active colors.
     const nextContentState = Object.keys(colorStyleMap).reduce((contentState, color) => {
@@ -55,26 +45,19 @@ function Draft() {
   return (
     <div>
       <Navbar />
-      <div className="test">
-        <p>Editor</p>
-        <button onClick={() => onBoldClick()}>
-          <b>B</b>
-        </button>
-        <button onClick={() => onItalicClick()}>
-          <i>I</i>
-        </button>
-        <button onClick={() => onUnderlineClick()}>
-          <u>U</u>
-        </button>
-        <ColorControls editorState={editorState} onToggle={toggleColor} />
-        <FontSizeControls editorState={editorState} onToggle={toggleInlineStyle} />
-        <Editor
-          customStyleMap={colorStyleMap}
-          editorState={editorState}
-          onChange={setEditorState}
-          spellCheck={true}
-        />
-      </div>
+     	<div className="test">
+			<p>Editor</p>
+			<MutationControls 
+				editorState={editorState}
+				onToggle={toggleInlineStyle}
+			/>
+			<ColorControls editorState={editorState} onToggle={toggleColor} />
+			<FontSizeControls 
+				editorState={editorState}
+				onToggle={toggleInlineStyle}
+			/>
+			<Editor customStyleMap={colorStyleMap} editorState={editorState} onChange={setEditorState} spellCheck={true} />
+		</div>
     </div>
   );
 }

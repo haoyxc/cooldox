@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import InlineButton from './InlineButton';
-import fontSizes from './FontSizeContainer/fontSizes'
+import MutationStyles from './InlineContainer/MutationStyles'
 
 function FontSizeControls(props) {
     const currentStyle = props.editorState.getCurrentInlineStyle();
 
     return (
     <div>
-        {fontSizes.map((type) =>
+        {MutationStyles.map((type) =>
               <InlineButton
                 key={type.label}
                 active={currentStyle.has(type.style)}

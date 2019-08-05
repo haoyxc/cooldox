@@ -14,5 +14,3 @@ export default [
     {label: '72', style: 'FONT_SIZE_72'},
     {label: '96', style: 'FONT_SIZE_96'},
      ];
-
-     //8, 9, 10, 11, 12, 14, 18, 24, 30, 36, 48, 60, 72, 96
