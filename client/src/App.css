@@ -5,4 +5,17 @@
 /* Draft Container */
 .draft-container {
   margin: 20px;
+  padding: 15px;
+  border: 1px solid black;
+  min-height: 300px;
+  border-radius: 20px;
+}
+.align-right div {
+  text-align: right;
+}
+.align-center div {
+  text-align: center;
+}
+.align-left div {
+  text-align: left;
 }
