@@ -13,11 +13,14 @@ const FacebookStrategy = require("passport-facebook");
 const TwitterStrategy = require("passport-twitter");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const socket = require("socket.io");
 const routes = require("./routes/index");
 const auth = require("./routes/auth");
+const User = require("./models/User");
 
 let app = express();
 const server = require("http").Server(app);
+const io = socket(server);
 
 // static
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
@@ -76,9 +79,9 @@ function hashPassword(password) {
   
   // Initialize Passport
   passport.use(
-    new LocalStrategy(function(email, password, done) {
+    new LocalStrategy(function(username, password, done) {
       const hashedPassword = hashPassword(password);
-      User.findOne({ email: email }, function(err, user) {
+      User.findOne({ username: username }, function(err, user) {
         console.log(user);
         if (err) {
           console.log("Incorrect Email");
@@ -93,6 +96,7 @@ function hashPassword(password) {
       });
     })
   );
+
   app.use(passport.initialize());
   app.use(passport.session());
   
