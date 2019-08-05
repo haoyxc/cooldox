@@ -6,7 +6,7 @@ function ColorControls(props) {
   const currentStyle = props.editorState.getCurrentInlineStyle();
 
   return (
-    <div>
+    <div className="color-controls">
       {COLORS.map(type => (
         <InlineButton
           className="color-option"
