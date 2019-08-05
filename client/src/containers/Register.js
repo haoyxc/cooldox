@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function Register() {
   // Registration states
   const [regUser, setRegUser] = useState("");
   const [regPass, setRegPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  // Login states
-  const [loginUser, setLoginUser] = useState("");
-  const [loginPass, setLoginPass] = useState("");
-  const [loggedIn, setLogin] = useState(false);
+  
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -23,20 +20,14 @@ export default function Register() {
   const handleRepeatPass = event => {
     setRepeatPass(event.target.value);
   };
-  const handleLoginUser = event => {
-    setLoginUser(event.target.value);
-  };
-  const handleLoginPassword = event => {
-    setLoginPass(event.target.value);
-  };
-
+  
   // Handle Registration
   const submitRegister = () => {
-    if (username.length === 0) {
+    if (regUser.length === 0) {
       setErrorMsg("Please enter a valid username");
-    } else if (password.length < 4) {
+    } else if (regPass.length < 4) {
       setErrorMsg("Please input a password of at least length 4");
-    } else if (password !== verifiedPassword) {
+    } else if (regPass !== repeatPass) {
       setErrorMsg("The passwords do not match");
     } else {
       postRegister().catch(event => {
@@ -47,7 +38,7 @@ export default function Register() {
   };
 
   const postRegister = async () => {
-    const response = await fetch("http://localhost:3000/register", {
+    const response = await fetch("http://localhost:4000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -63,6 +54,40 @@ export default function Register() {
     }
   };
 
+  return (
+      <div>
+          <Navbar />
+          <div>
+            <h3>Register</h3>
+            <hr />
+            <p>{errorMsg}</p>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="username"
+              value={regUser}
+              onChange={e => handleRegUser(e)}
+            />
+            <input
+              type="password"
+              className="form-control"
+              placeholder="password"
+              value={regPass}
+              onChange={e => handleRegPass(e)}
+            />
+            <input
+              type="password"
+              className="form-control"
+              placeholder="verify password"
+              value={repeatPass}
+              onChange={e => handleRepeatPass(e)}
+            />
+            <br />
+            <button onClick={() => submitRegister()} className="register-submit-btn">
+              Submit
+            </button>
+          </div>
+      </div>
+  )
 
-  
 }
