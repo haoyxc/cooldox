@@ -52,32 +52,40 @@ export default function Login() {
     return <Redirect to="/portal" />;
   } else {
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="username"
-          className="form-control mr-sm-2"
-          value={loginUser}
-          onChange={e => handleLoginUser(e)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          className="form-control mr-sm-2"
-          value={loginPass}
-          onChange={e => handleLoginPass(e)}
-        />
-        <button
-          onClick={() =>
-            postLogin().catch(e => {
-              setErrorMsg("Login request failed, please try again.");
-            })
-          }
-          className="login-btn"
-        >
+      <div className="main">
+        <p className="sign" style={{ textAlign: "center" }}>
           Login
-        </button>
-        <Link to="/">Register</Link>
+        </p>
+        <form class="form1">
+          <input
+          className="un "
+            type="text"
+            placeholder="username"
+            value={loginUser}
+            onChange={e => handleLoginUser(e)}
+          />
+          <input
+          className="pass"
+            type="password"
+            placeholder="password"
+            value={loginPass}
+            onChange={e => handleLoginPass(e)}
+          />
+          <button
+          className="submit"
+            onClick={() =>
+              postLogin().catch(e => {
+                setErrorMsg("Login request failed, please try again.");
+              })
+            }
+          >
+            Login
+          </button>
+          <br/>
+          <p className="forgot" style={{textAlign:"center"}}>
+          Don't have an account?<Link to="/"><strong><i> Register</i></strong></Link>
+        </p>
+        </form>
       </div>
     );
   }
