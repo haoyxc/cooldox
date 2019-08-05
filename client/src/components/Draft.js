@@ -9,7 +9,8 @@ function Draft() {
   return (
     <div className="draft-container">
       <p>editor</p>
-      <button onClick={this._onBoldClick.bind(this)}>Bold</button>
+      <button onClick={() => onBoldClick()}>Bold it</button>
+      <button onItalicClick={() => onItalicClick()}>Italic it</button>
       <Editor editorState={editorState} onChange={setEditorState} />
     </div>
   );
