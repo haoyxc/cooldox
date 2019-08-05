@@ -1,13 +1,15 @@
 import React from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./App.css";
 import Draft from "./components/Draft";
+import Register from "./containers/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">HELLO!</header>
-      <Draft />
-    </div>
+    <BrowserRouter>
+      <Route to="/" exact={true} component={Register} />
+      <Route to="/portal" exact={true} component={Draft} />
+    </BrowserRouter>
   );
 }
 
