@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Navbar() {
   // Login states
