@@ -9,7 +9,7 @@ export default function UserPortal() {
   const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
-  const [allPortals, setAllPortals] = useState(null);
+  const [allDocuments, setAllDocuments] = useState(null);
 
   const getPortals = async () => {
     try {
@@ -68,7 +68,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     let portals = getPortals();
-    setAllPortals(portals);
+    setAllDocuments(portals);
     console.log(allPortals);
   }, [allPortals]);
   return (
@@ -112,6 +112,13 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
+      {!allDocuments ? (
+        <div>No Documents! yet!!</div>
+      ) : (
+        allDocuments.map(doc => {
+          <h4>{doc.title}</h4>;
+        })
+      )}
     </div>
   );
 }
