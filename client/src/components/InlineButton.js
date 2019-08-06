@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 
-class FontSizeButton extends React.Component {
+class InlineButton extends React.Component {
     constructor() {
       super();
       this.onToggle = (e) => {
@@ -22,4 +22,4 @@ class FontSizeButton extends React.Component {
     }
   }
 
-  export default FontSizeButton;
+  export default InlineButton;
