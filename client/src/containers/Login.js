@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
+import UserPortal from "./UserPortal";
 
 export default function Login() {
   // Login states
@@ -25,7 +26,8 @@ export default function Login() {
   };
 
   // Handle Login
-  const postLogin = async () => {
+  const postLogin = async (e) => {
+    e.preventDefault();
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
       credentials: "include",
@@ -50,14 +52,15 @@ export default function Login() {
   };
 
   if (loggedIn) {
-    return <Redirect to="/portal" />;
-  } else {
+    return <Redirect push to="/portal" />;
+  } 
+  if (!loggedIn) {
     return (
       <div className="main">
         <p className="sign" style={{ textAlign: "center" }}>
           Login
         </p>
-        <form class="form1">
+        <form className="form1">
           <input
           className="un "
             type="text"
@@ -74,8 +77,8 @@ export default function Login() {
           />
           <button
           className="submit"
-            onClick={() =>
-              postLogin().catch(e => {
+            onClick={(e) =>
+              postLogin(e).catch(e => {
                 setErrorMsg("Login request failed, please try again.");
               })
             }
@@ -87,7 +90,6 @@ export default function Login() {
           Don't have an account?<Link to="/"><strong><i> Register</i></strong></Link>
         </p>
         </form>
-
       </div>
     );
   }
