@@ -34,7 +34,7 @@ export default function Navbar() {
             href="/"
             className="navbar-brand header-logo navbar-child titleName"
           >
-            CoolDoX
+            CoolDo<span className="coolX">X</span>
           </a>
         </div>
         <div className="logout-wrapper navbar-child">
