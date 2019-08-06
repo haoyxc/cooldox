@@ -6,18 +6,20 @@ const User = require("./User");
 mongoose.connect(connect);
 
 const documentSchema = new mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-	},
-	content: {
-		type: String,
-		required: true,
-    },
-    collaborators: {
-        type: [mongoose.Schema.ObjectId],
-        ref: User
+  title: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    default: ""
+  },
+  collaborators: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: User
     }
+  ]
 });
 
 let Document = mongoose.model("Document", documentSchema);
