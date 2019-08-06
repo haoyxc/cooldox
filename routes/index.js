@@ -26,13 +26,12 @@ router.get("/portals/", (req, res) => {
 });
 
 router.post("/newDocument", (req, res) => {
-  console.log(req);
-  res.send("hello");
-  //   console.log(req);
+  console.log("req", req);
   let newDoc = new Document({
     title: req.body.title,
     content: "",
-    collaborators: [req.user._id]
+    collaborators: [req.user._id],
+    password: req.body.password
   });
   newDoc
     .save()

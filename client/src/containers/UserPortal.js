@@ -4,7 +4,9 @@ import Navbar from "../components/Navbar";
 
 export default function UserPortal() {
   const [docname, setDocname] = useState("");
+  const [newDocPass, setNewDocPass] = useState("");
   const [findDocName, setFindDocName] = useState("");
+  const [findDocPass, setFindDocPass] = useState("");
 
   const getPortals = async () => {
     try {
@@ -18,11 +20,21 @@ export default function UserPortal() {
   const handleNewDocument = async e => {
     e.preventDefault();
     console.log("in add doc");
-    console.log(docname);
+    console.log(docname, "DOCNAME");
     try {
-      await axios.post("http://localhost:4000/newDocument", {
-        title: docname
-      });
+      let response = await axios.post(
+        "http://localhost:4000/newDocument",
+        {
+          title: docname,
+          password: newDocPass
+        },
+        {
+          withCredentials: true
+        }
+      );
+      //   console.log("THIS IS RESPON", response);
+      //   console.log(response.data, "RESPONSE");
+      let docData = response.data;
     } catch (e) {
       console.log(e);
     }
@@ -33,9 +45,18 @@ export default function UserPortal() {
     console.log("in find doc to add");
     console.log(findDocName);
     try {
-      await axios.post("http://localhost:4000/addDocument", {
-        title: findDocName
-      });
+      let response = await axios.post(
+        "http://localhost:4000/addDocument",
+        {
+          title: findDocName,
+          password: findDocPass
+        },
+        {
+          withCredentials: true
+        }
+      );
+      let docData = response.data;
+      console.log(response, "DOCDATA");
     } catch (e) {
       console.log(e);
     }
@@ -51,6 +72,13 @@ export default function UserPortal() {
             placeholder="document name.."
             onChange={e => setDocname(e.target.value)}
           />
+          <input
+            type="password"
+            name=""
+            id=""
+            placeholder="set document password"
+            onChange={e => setNewDocPass(e.target.value)}
+          />
           <button type="submit" onClick={e => handleNewDocument(e)}>
             Add!
           </button>
@@ -61,6 +89,12 @@ export default function UserPortal() {
             type="text"
             placeholder="document name to find.."
             onChange={e => setFindDocName(e.target.value)}
+          />
+          <input
+            type="password"
+            name=""
+            id=""
+            onChange={e => setFindDocPass(e.target.value)}
           />
           <button type="submit" onClick={e => handleAddDocument(e)}>
             Find!
