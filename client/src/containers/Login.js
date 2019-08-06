@@ -12,6 +12,7 @@ export default function Login() {
     }
     return false;
   };
+  
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -65,7 +66,7 @@ export default function Login() {
             onChange={e => handleLoginUser(e)}
           />
           <input
-          className="pass"
+          className="un"
             type="password"
             placeholder="password"
             value={loginPass}

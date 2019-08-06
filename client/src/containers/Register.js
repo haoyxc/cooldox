@@ -74,14 +74,14 @@ export default function Register() {
         />
         <input
           type="password"
-          className="pass"
+          className="un"
           placeholder="password"
           value={regPass}
           onChange={e => handleRegPass(e)}
         />
         <input
           type="password"
-          className="pass"
+          className="un"
           placeholder="verify password"
           value={repeatPass}
           onChange={e => handleRepeatPass(e)}
