@@ -67,7 +67,7 @@ export default function Register() {
     <Navbar/>
     <div className="main">
       <p className="sign" style={{textAlign:"center"}}>Register</p>
-      <p>{errorMsg}</p>
+      <p style={{textAlign: "center", color:"red"}}>{errorMsg}</p>
       <form class="form1">
         <input
           className="un "
