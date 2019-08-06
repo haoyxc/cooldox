@@ -60,6 +60,7 @@ router.post("/addDocument", async (req, res) => {
       let doc = await Document.findOne({ id: req.params.id });
       res.json({ success: true, document: doc });
     } catch (e) {
+      res.json({ success: false, error: e });
       console.log(e);
     }
   });

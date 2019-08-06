@@ -9,6 +9,8 @@ export default function UserPortal() {
   const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
+  const [allPortals, setAllPortals] = useState(null);
+
   const getPortals = async () => {
     try {
       let response = await axios.get("/portals");
@@ -63,6 +65,12 @@ export default function UserPortal() {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    let portals = getPortals();
+    setAllPortals(portals);
+    console.log(allPortals);
+  }, [allPortals]);
   return (
     <div>
       <Navbar />
