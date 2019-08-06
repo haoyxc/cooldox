@@ -56,10 +56,6 @@ export default function Login() {
       <div className="main">
         <p className="sign" style={{ textAlign: "center" }}>
           Login
-
-        
-        <Link to="/">Register</Link>
-
         </p>
         <form class="form1">
           <input
