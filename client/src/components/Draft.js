@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from 'draft-js';
 import { Redirect } from 'react-router-dom';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
@@ -15,7 +15,30 @@ function Draft() {
 	};
 	const toggleBlockStyle = (blockStyle) => {
 		setEditorState(RichUtils.toggleBlockType(editorState, blockStyle));
-	};
+  };
+  const handleKeyShortcut = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      setEditorState(newState);
+      return true;
+    }
+    return false;
+  }
+
+  const mapKeyToEditorCommand = e => {
+    if (e.keyCode === 9) {
+      const newEditorState = RichUtils.onTab(
+        e,
+        editorState,
+        4,
+      );
+      if (newEditorState !== editorState) {
+        setEditorState(newEditorState);
+      }
+      return;
+    }
+    return getDefaultKeyBinding(e);
+  }
 
 	// Beginning of paragraph alignment
 	const onAlignmentClick = (style, removeStyles) => {
@@ -68,8 +91,8 @@ function Draft() {
 		<div className="RichEditor-root">
 			<MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
 			<ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<FontSizeControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<div className="paragraph-controls">
+			<FontSizeControls editorState={editorState} onToggle={toggleInlineStyle}/>
+      <div className="paragraph-controls">
 				<button onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
 					<i className="fa fa-align-left" />
 				</button>
@@ -83,11 +106,15 @@ function Draft() {
 			<ListControls editorState={editorState} onToggle={toggleBlockStyle} />
 			<div className="RichEditor-editor">
 				<Editor
+          id = "richEditor"
 					customStyleMap={colorStyleMap}
 					spellCheck={true}
-					editorState={editorState}
+          editorState={editorState}
+          handlekeyCommand={handleKeyShortcut}
+          keyBindingFn={mapKeyToEditorCommand}
 					onChange={setEditorState}
-					blockStyleFn={getBlockStyle}
+          blockStyleFn={getBlockStyle}
+          ref={Editor => Editor && Editor.focus()}
 				/>
 			</div>
 		</div>
