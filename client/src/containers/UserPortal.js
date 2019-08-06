@@ -69,8 +69,8 @@ export default function UserPortal() {
   useEffect(() => {
     let portals = getPortals();
     setAllDocuments(portals);
-    console.log(allPortals);
-  }, [allPortals]);
+    console.log(allDocuments);
+  }, [allDocuments]);
   return (
     <div>
       <Navbar />
