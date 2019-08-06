@@ -6,7 +6,7 @@ function FontSizeControls(props) {
   const currentStyle = props.editorState.getCurrentInlineStyle();
 
   return (
-    <div>
+    <div className="RichEditor-controls">
       {fontSizes.map(type => (
         <InlineButton
           className="fontsize-option"

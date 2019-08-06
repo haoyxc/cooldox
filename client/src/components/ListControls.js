@@ -10,7 +10,7 @@ function ListControls(props) {
       .getBlockForKey(selection.getStartKey())
       .getType();
     return (
-      <div>
+      <div className = "RichEditor-controls">
         {Lists.map((type) =>
           <InlineButton
             key={type.label}
