@@ -26,38 +26,58 @@ router.get("/portals/", (req, res) => {
 });
 
 router.post("/newDocument", (req, res) => {
-  //   console.log(req);
-  //   res.send("hello");
-  //   console.log(req);
+  console.log("req", req);
   let newDoc = new Document({
     title: req.body.title,
     content: "",
-    collaborators: [req.user._id]
+    collaborators: [req.user._id],
+    password: req.body.password
   });
   newDoc
     .save()
-    .then(document => res.send({ success: true, document: document }))
-    .catch(e => res.send({ success: false, error: e }));
+    .then(document => res.json({ success: true, document: document }))
+    .catch(e => res.json({ success: false, error: e }));
 });
 
-router.post("/addDocument", (req, res) => {
-  const doc = new Document({
-    title: req.body.title,
-    collaborators: [req.user._id]
-  });
-  doc.save((err, doc) => {
-    if (err) {
-      res.json({
-        success: false,
-        error: err
-      });
-    } else {
-      res.json({
-        success: true,
-        document: doc
-      });
-    }
-  });
+router.post("/addDocument", async (req, res) => {
+  try {
+    let doc = await Document.findOne({ title: req.body.title });
+    const collabs = doc.collaborators;
+    await Document.updateOne(
+      { title: req.body.title },
+      { collaborators: [...collabs, req.user.id] }
+    );
+    doc.collaborators = [...collabs, req.user.id];
+    await doc.save();
+    res.send(doc);
+  } catch (e) {
+    console.log(e);
+    res.send(e);
+  }
+
+  //   Document.findOne({ title: req.body.title })
+  //     .then(doc => {
+  //       console.log(doc);
+  //       let collaborators = doc.collaborators;
+  //       collaborators = [...collaborators, req.user._id];
+  //       doc.collaborators = collaborators;
+  //     })
+  //     .catch(e => {
+  //       console.log(e0);
+  //     });
+  //   doc.save((err, doc) => {
+  //     if (err) {
+  //       res.json({
+  //         success: false,
+  //         error: err
+  //       });
+  //     } else {
+  //       res.json({
+  //         success: true,
+  //         document: doc
+  //       });
+  //     }
+  //   });
 });
 
 module.exports = router;
