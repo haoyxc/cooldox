@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { Redirect, Link } from "react-router-dom";
 
 export default function UserPortal() {
   const [docname, setDocname] = useState("");
   const [newDocPass, setNewDocPass] = useState("");
   const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
+
+  const [allPortals, setAllPortals] = useState(null);
 
   const getPortals = async () => {
     try {
@@ -35,6 +38,7 @@ export default function UserPortal() {
       //   console.log("THIS IS RESPON", response);
       //   console.log(response.data, "RESPONSE");
       let docData = response.data;
+      //   return <Redirect to="/editor" />;
     } catch (e) {
       console.log(e);
     }
@@ -61,6 +65,12 @@ export default function UserPortal() {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    let portals = getPortals();
+    setAllPortals(portals);
+    console.log(allPortals);
+  }, [allPortals]);
   return (
     <div>
       <Navbar />
@@ -94,6 +104,7 @@ export default function UserPortal() {
             type="password"
             name=""
             id=""
+            placeholder="password of target document.."
             onChange={e => setFindDocPass(e.target.value)}
           />
           <button type="submit" onClick={e => handleAddDocument(e)}>
