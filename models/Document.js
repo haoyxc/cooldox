@@ -8,7 +8,16 @@ mongoose.connect(connect);
 const documentSchema = new mongoose.Schema({
   title: {
     type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
     required: true
+  },
+  password: {
+      type: String,
+      required: true
   },
   content: {
     type: String,

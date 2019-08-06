@@ -34,11 +34,11 @@ export default function Navbar() {
             href="/"
             className="navbar-brand header-logo navbar-child titleName"
           >
-            CoolDoX
+            CoolDo<span className="coolX">X</span>
           </a>
         </div>
         <div className="logout-wrapper navbar-child">
-          <button
+          {localStorage.getItem("token")?<button
             onClick={() =>
               logout().catch(e => {
                 setErrorMsg("Logout request failed, please try again.");
@@ -47,7 +47,8 @@ export default function Navbar() {
             className="submit"
           >
             Logout
-          </button>
+          </button>:
+        null}
         </div>
       </nav>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
+import Navbar from "../components/Navbar"
 
 export default function Register() {
   // Registration states
@@ -62,9 +63,11 @@ export default function Register() {
     return <Redirect to="/login" />;
   }
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <p className="sign" style={{textAlign:"center"}}>Register</p>
-      <p>{errorMsg}</p>
+      <p style={{textAlign: "center", color:"red"}}>{errorMsg}</p>
       <form class="form1">
         <input
           className="un "
@@ -96,5 +99,7 @@ export default function Register() {
         </p>
       </form>
     </div>
+    </>
+    
   );
 }
