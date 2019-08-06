@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from 'draft-js';
 import { Redirect } from 'react-router-dom';
 import ColorControls from './ColorControls';
@@ -9,13 +9,23 @@ import ListControls from './ListControls';
 import Navbar from './Navbar';
 
 function Draft() {
-	const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+  const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+  const [ color, setColor ] = React.useState("");
+  const [ fontSize, setFontSize ] = React.useState("");
 	const toggleInlineStyle = (inlineStyle) => {
 		setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
 	};
 	const toggleBlockStyle = (blockStyle) => {
 		setEditorState(RichUtils.toggleBlockType(editorState, blockStyle));
   };
+  const toggleColor = (color) => {
+    setColor(color);
+    setEditorState(RichUtils.toggleInlineStyle(editorState, color))
+  }
+  const toggleFontSize = (fontSize) => {
+    setFontSize(fontSize);
+    setEditorState(RichUtils.toggleInlineStyle(editorState, fontSize))
+  }
   const handleKeyShortcut = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -85,13 +95,13 @@ function Draft() {
 		}
 		return `align-${alignment}`;
 	};
-	//end of block alignment
+  //end of block alignment
 
 	return (
 		<div className="RichEditor-root">
 			<MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<FontSizeControls editorState={editorState} onToggle={toggleInlineStyle}/>
+			<ColorControls editorState={editorState} onToggle={toggleColor} color={color}/>
+			<FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize}/>
       <div className="paragraph-controls">
 				<button onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
 					<i className="fa fa-align-left" />

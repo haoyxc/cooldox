@@ -71,10 +71,11 @@
 }
 
 .RichEditor-styleButton {
-  color: #777;
+  color: #000;
   cursor: pointer;
   padding: 1px 0;
   display: block;
+  margin-right: 1em;
 }
 
 .RichEditor-activeButton {

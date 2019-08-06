@@ -16,7 +16,7 @@ function FontSizeControls(props) {
 					aria-haspopup="true"
 					aria-expanded="false"
 				>
-					Fonts
+					{props.fontSize.slice(10) || "14"}
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					{fontSizes.map((type) => (

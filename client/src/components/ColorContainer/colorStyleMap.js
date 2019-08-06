@@ -20,6 +20,9 @@ export default {
 	violet: {
 		color: 'rgba(127, 0, 255, 1.0)'
 	},
+	black: {
+		color: 'rgba(0, 0, 0, 1.0)'
+	},
 	FONT_SIZE_8: {
 		fontSize: '8px'
 	},

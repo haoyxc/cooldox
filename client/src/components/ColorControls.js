@@ -17,7 +17,7 @@ function ColorControls(props) {
 						aria-haspopup="true"
 						aria-expanded="false"
 					>
-						Colors
+						{props.color || "black"}
 					</button>
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{COLORS.map((type) => (
