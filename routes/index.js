@@ -26,6 +26,21 @@ router.get("/portals/", (req, res) => {
     })
 });
 
+router.post("/addDocument", (req, res) => {
+  console.log(req);
+  res.send("hello");
+  console.log(req);
+  let newDoc = new Document({
+    title: req.title,
+    content: "",
+    collaborators: [req.user._id]
+  });
+  newDoc
+    .save()
+    .then(document => res.send(document))
+    .catch(e => res.send(e));
+});
+
 router.post("/newDocument", (req,res) => {
     const doc = new Document({
         title: req.body.title,
@@ -46,5 +61,6 @@ router.post("/newDocument", (req,res) => {
         }
     })
 })
+
 
 module.exports = router;

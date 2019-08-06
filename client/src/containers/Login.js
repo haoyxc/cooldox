@@ -56,6 +56,10 @@ export default function Login() {
       <div className="main">
         <p className="sign" style={{ textAlign: "center" }}>
           Login
+
+        </button>
+        <Link to="/">Register</Link>
+
         </p>
         <form class="form1">
           <input
@@ -87,6 +91,7 @@ export default function Login() {
           Don't have an account?<Link to="/"><strong><i> Register</i></strong></Link>
         </p>
         </form>
+
       </div>
     );
   }
