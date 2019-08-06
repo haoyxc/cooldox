@@ -116,7 +116,7 @@ export default function UserPortal() {
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
-          <h4>{doc.title}</h4>;
+          return <h4>{doc.title}</h4>;
         })
       )}
     </div>
