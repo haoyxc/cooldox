@@ -30,14 +30,20 @@ export default function UserPortal() {
   };
   return (
     <div>
-      <input
-        type="text"
-        placeholder="document name"
-        onChange={e => setDocname(e.target.value)}
-      />
-      <button type="submit" onClick={e => handleAddDocument(e)}>
-        New Document
-      </button>
+      <div className="new-doc-container">
+        <h2>Add a New Document</h2>
+        <input
+          type="text"
+          placeholder="document name"
+          onChange={e => setDocname(e.target.value)}
+        />
+        <button type="submit" onClick={e => handleAddDocument(e)}>
+          New Document
+        </button>
+      </div>
+      <div className="add-doc-container">
+        <h2>Find a document to Add</h2>
+      </div>
 
       <div>hello this is the userportal</div>
     </div>
