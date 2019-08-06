@@ -57,7 +57,7 @@ export default function Login() {
         <p className="sign" style={{ textAlign: "center" }}>
           Login
 
-        </button>
+        
         <Link to="/">Register</Link>
 
         </p>
