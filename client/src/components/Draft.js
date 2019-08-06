@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import React, { useState, useEffect } from 'react';
+import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from 'draft-js';
 import { Redirect } from 'react-router-dom';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
@@ -9,13 +9,46 @@ import ListControls from './ListControls';
 import Navbar from './Navbar';
 
 function Draft() {
-	const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+  const [ editorState, setEditorState ] = React.useState(EditorState.createEmpty());
+  const [ color, setColor ] = React.useState("");
+  const [ fontSize, setFontSize ] = React.useState("");
 	const toggleInlineStyle = (inlineStyle) => {
 		setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
 	};
 	const toggleBlockStyle = (blockStyle) => {
 		setEditorState(RichUtils.toggleBlockType(editorState, blockStyle));
-	};
+  };
+  const toggleColor = (color) => {
+    setColor(color);
+    setEditorState(RichUtils.toggleInlineStyle(editorState, color))
+  }
+  const toggleFontSize = (fontSize) => {
+    setFontSize(fontSize);
+    setEditorState(RichUtils.toggleInlineStyle(editorState, fontSize))
+  }
+  const handleKeyShortcut = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      setEditorState(newState);
+      return true;
+    }
+    return false;
+  }
+
+  const mapKeyToEditorCommand = e => {
+    if (e.keyCode === 9) {
+      const newEditorState = RichUtils.onTab(
+        e,
+        editorState,
+        4,
+      );
+      if (newEditorState !== editorState) {
+        setEditorState(newEditorState);
+      }
+      return;
+    }
+    return getDefaultKeyBinding(e);
+  }
 
 	// Beginning of paragraph alignment
 	const onAlignmentClick = (style, removeStyles) => {
@@ -62,14 +95,14 @@ function Draft() {
 		}
 		return `align-${alignment}`;
 	};
-	//end of block alignment
+  //end of block alignment
 
 	return (
 		<div className="RichEditor-root">
 			<MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<ColorControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<FontSizeControls editorState={editorState} onToggle={toggleInlineStyle} />
-			<div className="paragraph-controls">
+			<ColorControls editorState={editorState} onToggle={toggleColor} color={color}/>
+			<FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize}/>
+      <div className="paragraph-controls">
 				<button onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
 					<i className="fa fa-align-left" />
 				</button>
@@ -83,11 +116,15 @@ function Draft() {
 			<ListControls editorState={editorState} onToggle={toggleBlockStyle} />
 			<div className="RichEditor-editor">
 				<Editor
+          id = "richEditor"
 					customStyleMap={colorStyleMap}
 					spellCheck={true}
-					editorState={editorState}
+          editorState={editorState}
+          handlekeyCommand={handleKeyShortcut}
+          keyBindingFn={mapKeyToEditorCommand}
 					onChange={setEditorState}
-					blockStyleFn={getBlockStyle}
+          blockStyleFn={getBlockStyle}
+          ref={Editor => Editor && Editor.focus()}
 				/>
 			</div>
 		</div>
