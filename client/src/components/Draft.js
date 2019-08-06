@@ -35,21 +35,6 @@ function Draft() {
     return false;
   }
 
-  const mapKeyToEditorCommand = e => {
-    if (e.keyCode === 9) {
-      const newEditorState = RichUtils.onTab(
-        e,
-        editorState,
-        4,
-      );
-      if (newEditorState !== editorState) {
-        setEditorState(newEditorState);
-      }
-      return;
-    }
-    return getDefaultKeyBinding(e);
-  }
-
 	// Beginning of paragraph alignment
 	const onAlignmentClick = (style, removeStyles) => {
 		const selection = editorState.getSelection();
@@ -120,8 +105,7 @@ function Draft() {
 					customStyleMap={colorStyleMap}
 					spellCheck={true}
           editorState={editorState}
-          handlekeyCommand={handleKeyShortcut}
-          keyBindingFn={mapKeyToEditorCommand}
+          handleKeyCommand={handleKeyShortcut}
 					onChange={setEditorState}
           blockStyleFn={getBlockStyle}
           ref={Editor => Editor && Editor.focus()}
