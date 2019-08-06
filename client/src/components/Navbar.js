@@ -14,30 +14,37 @@ export default function Navbar() {
     if (!content.success) {
       setErrorMsg("Logout unsuccessful");
     } else {
-      localStorage.setItem("token", "");
+      localStorage.clear();
       setLogoutPress(true);
     }
-  };    
+  };
 
-  if(logoutPress){
-      return <Redirect to="/"/>
+  if (logoutPress) {
+    return <Redirect to="/" />;
   }
 
   return (
     <div>
       <nav className="navbar navbar-light bg-light" id="register-navbar">
-        <div className="navbar-child" />
-        <a href="/" className="navbar-brand header-logo navbar-child">
-          HORIZODOCZ
-        </a>
-        <div className="login-wrapper navbar-child">
+        <div className="navbar-child filler">
+
+        </div>
+        <div className="navbar-child logo">
+          <a
+            href="/"
+            className="navbar-brand header-logo navbar-child titleName"
+          >
+            CoolDoX
+          </a>
+        </div>
+        <div className="logout-wrapper navbar-child">
           <button
             onClick={() =>
               logout().catch(e => {
                 setErrorMsg("Logout request failed, please try again.");
               })
             }
-            className="login-btn"
+            className="submit"
           >
             Logout
           </button>
