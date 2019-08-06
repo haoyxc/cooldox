@@ -107,6 +107,10 @@ a {
   text-align: right;
 }
 
+.coolX {
+  color: #8c55aa;
+}
+
 @media (max-width: 600px) {
   .main {
     border-radius: 0px;
