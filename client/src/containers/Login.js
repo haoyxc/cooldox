@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import UserPortal from "./UserPortal";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   // Login states
@@ -56,6 +56,8 @@ export default function Login() {
   } 
   if (!loggedIn) {
     return (
+      <>
+      <Navbar/>
       <div className="main">
         <p className="sign" style={{ textAlign: "center" }}>
           Login
@@ -96,6 +98,7 @@ export default function Login() {
           </p>
         </form>
       </div>
+      </>
     );
   }
 }
