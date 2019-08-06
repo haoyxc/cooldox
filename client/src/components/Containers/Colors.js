@@ -1,9 +1,10 @@
 export default [
-        { label: 'Red', style: 'red' },
-        { label: 'Orange', style: 'orange' },
-        { label: 'Yellow', style: 'yellow' },
-        { label: 'Green', style: 'green' },
-        { label: 'Blue', style: 'blue' },
-        { label: 'Indigo', style: 'indigo' },
-        { label: 'Violet', style: 'violet' }
-    ]
+	{ label: 'black', style: 'black' },
+	{ label: 'red', style: 'red' },
+	{ label: 'orange', style: 'orange' },
+	{ label: 'yellow', style: 'yellow' },
+	{ label: 'green', style: 'green' },
+	{ label: 'blue', style: 'blue' },
+	{ label: 'indigo', style: 'indigo' },
+	{ label: 'violet', style: 'violet' }
+];

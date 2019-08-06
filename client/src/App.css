@@ -66,18 +66,38 @@
   font-size: 14px;
   margin-bottom: 5px;
   user-select: none;
+  display: inline-block;
+  margin-right: .5em;
 }
 
 .RichEditor-styleButton {
-  color: #999;
+  color: #000;
   cursor: pointer;
-  margin-right: 16px;
-  padding: 2px 0;
-  display: inline-block;
+  padding: 1px 0;
+  display: block;
+  margin-right: 1em;
 }
 
 .RichEditor-activeButton {
   color: #5890ff;
+}
+
+.color-controls {
+  display: inline-block;
+}
+
+.paragraph-controls {
+  display: inline-block;
+  margin-right: .5em;
+}
+
+.dropdown-menu.show {
+  padding: 0;
+  min-width: 2em;
+}
+
+.dropdown-divider {
+  margin: 0;
 }
 /* User portal CSS Start */
 .portal-content {
