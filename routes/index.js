@@ -55,6 +55,15 @@ router.post("/addDocument", async (req, res) => {
     res.send(e);
   }
 
+  router.get("/editor/:id", async (req, res) => {
+    try {
+      let doc = await Document.findOne({ id: req.params.id });
+      res.json({ success: true, document: doc });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
   //   Document.findOne({ title: req.body.title })
   //     .then(doc => {
   //       console.log(doc);
