@@ -5,7 +5,7 @@ const User = require("../models/User");
 const Document = require("../models/Document");
 
 // all routes after login
-router.get("/portals/", (req, res) => {
+router.get("/portals", (req, res) => {
   const user = req.user;
   Document.find()
     .populate("User")
