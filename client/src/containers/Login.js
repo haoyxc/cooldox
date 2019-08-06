@@ -12,7 +12,7 @@ export default function Login() {
     }
     return false;
   };
-  
+
   // Errors
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -56,28 +56,25 @@ export default function Login() {
       <div className="main">
         <p className="sign" style={{ textAlign: "center" }}>
           Login
-
-        </button>
-        <Link to="/">Register</Link>
-
+          <Link to="/">Register</Link>
         </p>
         <form class="form1">
           <input
-          className="un "
+            className="un "
             type="text"
             placeholder="username"
             value={loginUser}
             onChange={e => handleLoginUser(e)}
           />
           <input
-          className="un"
+            className="un"
             type="password"
             placeholder="password"
             value={loginPass}
             onChange={e => handleLoginPass(e)}
           />
           <button
-          className="submit"
+            className="submit"
             onClick={() =>
               postLogin().catch(e => {
                 setErrorMsg("Login request failed, please try again.");
@@ -86,12 +83,16 @@ export default function Login() {
           >
             Login
           </button>
-          <br/>
-          <p className="forgot" style={{textAlign:"center"}}>
-          Don't have an account?<Link to="/"><strong><i> Register</i></strong></Link>
-        </p>
+          <br />
+          <p className="forgot" style={{ textAlign: "center" }}>
+            Don't have an account?
+            <Link to="/">
+              <strong>
+                <i> Register</i>
+              </strong>
+            </Link>
+          </p>
         </form>
-
       </div>
     );
   }
