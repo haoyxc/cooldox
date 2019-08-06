@@ -23,7 +23,8 @@ export default function Register() {
   };
 
   // Handle Registration
-  const submitRegister = () => {
+  const submitRegister = (e) => {
+    e.preventDefault();
     if (regUser.length === 0) {
       setErrorMsg("Please enter a valid username");
     } else if (regPass.length < 4) {
@@ -87,7 +88,7 @@ export default function Register() {
           onChange={e => handleRepeatPass(e)}
         />
         <br />
-        <button onClick={() => submitRegister()} className="submit">
+        <button onClick={(e) => submitRegister(e)} className="submit">
           Submit
         </button>
         <p className="forgot" style={{textAlign:"center"}}>
