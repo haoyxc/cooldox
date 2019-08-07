@@ -20,6 +20,8 @@ function Draft() {
   };
   const toggleColor = (color) => {
     setColor(color);
+    console.log(editorState);
+    console.log(RichUtils);
     setEditorState(RichUtils.toggleInlineStyle(editorState, color))
   }
   const toggleFontSize = (fontSize) => {
@@ -85,8 +87,11 @@ function Draft() {
 	return (
 		<div className="RichEditor-root">
 			<MutationControls editorState={editorState} onToggle={toggleInlineStyle} />
+      <span style={{borderLeft: "1px solid grey", marginRight: "3px"}}></span>
 			<ColorControls editorState={editorState} onToggle={toggleColor} color={color}/>
-			<FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize}/>
+			<span style={{borderLeft: "1px solid grey", marginRight: "3px"}}></span>
+      <FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize}/>
+      <span style={{borderLeft: "1px solid grey", marginRight: "3px"}}></span>
       <div className="paragraph-controls">
 				<button onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
 					<i className="fa fa-align-left" />
@@ -98,6 +103,7 @@ function Draft() {
 					<i className="fa fa-align-right" />
 				</button>
 			</div>
+      <span style={{borderLeft: "1px solid grey", marginRight: "3px"}}></span>
 			<ListControls editorState={editorState} onToggle={toggleBlockStyle} />
 			<div className="RichEditor-editor">
 				<Editor
