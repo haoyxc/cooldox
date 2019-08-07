@@ -95,7 +95,7 @@ export default function UserPortal() {
           <input
             className="un"
             type="text"
-            placeholder="document name.."
+            placeholder="document name"
             value={docname}
             onChange={e => setDocname(e.target.value)}
           />
@@ -104,7 +104,7 @@ export default function UserPortal() {
             type="password"
             name=""
             id=""
-            placeholder="set document password"
+            placeholder="password"
             value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
           />
@@ -119,7 +119,7 @@ export default function UserPortal() {
           <input
             className="un"
             type="text"
-            placeholder="document id to find.."
+            placeholder="document id"
             value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
@@ -128,7 +128,7 @@ export default function UserPortal() {
             type="password"
             name=""
             id=""
-            placeholder="password of target document.."
+            placeholder="password"
             value={findDocPass}
             onChange={e => setFindDocPass(e.target.value)}
           />
@@ -147,7 +147,7 @@ export default function UserPortal() {
           allDocuments.map(doc => {
             return (
               <h5>
-                <Link to="/editor">{doc.title}</Link>
+                <Link to="/editor" style={{color: "#8c55aa"}}>{doc.title}</Link>
               </h5>
             );
           })
