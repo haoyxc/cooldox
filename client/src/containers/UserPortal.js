@@ -14,13 +14,13 @@ export default function UserPortal() {
 
   const getDocuments = async () => {
     try {
-      let response = await axios.get("http://localhost:4000/portals",{
+      let response = await axios.get("http://localhost:4000/portals", {
         withCredentials: true
       });
       let content = response.data;
       //console.log(response);
-      if(!content.success){
-        console.log('failed to get documents');
+      if (!content.success) {
+        console.log("failed to get documents");
       } else {
         setAllDocuments(content.documents);
       }
@@ -84,7 +84,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     getDocuments();
-  }, [allDocuments,docname,newDocPass]);
+  }, [allDocuments, docname, newDocPass]);
 
   return (
     <div>
@@ -93,14 +93,14 @@ export default function UserPortal() {
         <div className="new-doc-container">
           <h2>Add a New Document</h2>
           <input
-          className="un"
+            className="un"
             type="text"
             placeholder="document name.."
             value={docname}
             onChange={e => setDocname(e.target.value)}
           />
           <input
-          className="un"
+            className="un"
             type="password"
             name=""
             id=""
@@ -108,21 +108,23 @@ export default function UserPortal() {
             value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
           />
-          <button type="submit" onClick={e => handleNewDocument(e)}>
-            Add!
-          </button>
+          <p>
+            <button type="submit" onClick={e => handleNewDocument(e)}>
+              Add!
+            </button>
+          </p>
         </div>
         <div className="add-doc-container">
           <h2>Find a document to Add</h2>
           <input
-          className="un"
+            className="un"
             type="text"
             placeholder="document id to find.."
             value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
           <input
-          className="un"
+            className="un"
             type="password"
             name=""
             id=""
@@ -130,22 +132,27 @@ export default function UserPortal() {
             value={findDocPass}
             onChange={e => setFindDocPass(e.target.value)}
           />
-          <button type="submit" onClick={e => handleAddDocument(e)}>
-            Find!
-          </button>
+          <p>
+            <button type="submit" onClick={e => handleAddDocument(e)}>
+              Find!
+            </button>
+          </p>
         </div>
       </div>
       <div className="docList">
-      <h3>Your documents</h3>
-      {!allDocuments.length ? (
-        <div>No Documents! yet!!</div>
-      ) : (
-        allDocuments.map(doc => {
-          return <h5><Link to="/editor">{doc.title}</Link></h5>;
-        })
-      )} 
+        <h3>Your documents</h3>
+        {!allDocuments.length ? (
+          <div>No Documents! yet!!</div>
+        ) : (
+          allDocuments.map(doc => {
+            return (
+              <h5>
+                <Link to="/editor">{doc.title}</Link>
+              </h5>
+            );
+          })
+        )}
       </div>
-      
     </div>
   );
 }
