@@ -97,7 +97,7 @@ router.post("/getEditor", async (req, res) => {
 
 router.post("/editor/:id/save", async (req, res) => {
   try {
-    let doc = await Document.findOneById(req.params.id)
+    let doc = await Document.findById(req.params.id)
     doc.history.push({content: req.body.content, modifiedAt: req.body.modifiedAt})
     await doc.save();
     res.json({

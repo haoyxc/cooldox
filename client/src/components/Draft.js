@@ -14,8 +14,8 @@ function Draft({ docId }) {
   const [fontSize, setFontSize] = React.useState("");
 
   const onSave = async function() {
-    const content = convertToRaw(editorState.getCurrentContent()).blocks[0].text;
-    console.log(content);
+    //const content = convertToRaw(editorState.getCurrentContent()).blocks[0].text;
+    const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     try {
       const response = await axios.post(
         `http://localhost:4000/editor/${docId}/save`,
@@ -33,7 +33,17 @@ function Draft({ docId }) {
       console.log(e);
     }
   };
-  
+
+  // const getSavedContent = async function() {
+  //   try {
+  //     const content = await axios.get(
+  //       `http://localhost:4000/editor/${docId}/save`,
+  //     )
+  //   } catch(e) {
+  //     console.log(e);
+  //   }
+  // }
+
   const toggleInlineStyle = inlineStyle => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
