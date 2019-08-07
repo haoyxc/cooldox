@@ -8,7 +8,6 @@ export default function UserPortal() {
   const [newDocPass, setNewDocPass] = useState("");
 
   const [findDocId, setDocId] = useState("");
-  const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
   const [allDocuments, setAllDocuments] = useState([]);
@@ -23,9 +22,7 @@ export default function UserPortal() {
       if(!content.success){
         console.log('failed to get documents');
       } else {
-        console.log('documnets', content.documents)
         setAllDocuments(content.documents);
-        console.log('alldocs', allDocuments)
       }
     } catch (e) {
       console.log(e);
@@ -47,8 +44,8 @@ export default function UserPortal() {
           withCredentials: true
         }
       );
-      //   console.log("THIS IS RESPON", response);
-      //   console.log(response.data, "RESPONSE");
+      setNewDocPass("");
+      setDocname("");
       let docData = response.data;
       //   return <Redirect to="/editor" />;
     } catch (e) {
@@ -81,8 +78,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     getDocuments();
-    console.log(allDocuments);
-  }, []);
+  }, [allDocuments,docname,newDocPass]);
 
   return (
     <div>
@@ -93,6 +89,7 @@ export default function UserPortal() {
           <input
             type="text"
             placeholder="document name.."
+            value={docname}
             onChange={e => setDocname(e.target.value)}
           />
           <input
@@ -100,6 +97,7 @@ export default function UserPortal() {
             name=""
             id=""
             placeholder="set document password"
+            value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
           />
           <button type="submit" onClick={e => handleNewDocument(e)}>
@@ -111,6 +109,7 @@ export default function UserPortal() {
           <input
             type="text"
             placeholder="document id to find.."
+            value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
           <input
@@ -118,6 +117,7 @@ export default function UserPortal() {
             name=""
             id=""
             placeholder="password of target document.."
+            value={findDocPass}
             onChange={e => setFindDocPass(e.target.value)}
           />
           <button type="submit" onClick={e => handleAddDocument(e)}>
@@ -129,7 +129,6 @@ export default function UserPortal() {
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
-          console.log(allDocuments);
           return <h4>{doc.title}</h4>;
         })
       )} 
