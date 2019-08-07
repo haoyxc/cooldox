@@ -19,7 +19,7 @@ function ColorControls(props) {
             aria-expanded="false"
             style = {{color: props.color}}
 					>
-						{props.color || "black"}
+						{props.color ? (props.color[0].toUpperCase() + props.color.slice(1)) : "Black"}
 					</button>
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{COLORS.map((type) => (

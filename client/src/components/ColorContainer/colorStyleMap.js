@@ -6,7 +6,7 @@ export default {
 		color: 'rgba(255, 127, 0, 1.0)'
 	},
 	yellow: {
-		color: 'rgba(180, 180, 0, 1.0)'
+		color: 'rgba(255, 255, 0, 1.0)'
 	},
 	green: {
 		color: 'rgba(0, 180, 0, 1.0)'
