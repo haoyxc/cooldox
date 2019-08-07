@@ -5,24 +5,26 @@ const User = require("../models/User");
 const Document = require("../models/Document");
 
 // all routes after login
-router.get("/portals/", (req, res) => {
+router.get("/portals", (req, res) => {
   const user = req.user;
-  Document.find()
-    .populate("User")
-    .find({ collaborators: { $elemMatch: { _id: user._id } } })
-    .exec((err, docs) => {
-      if (err) {
-        res.json({
-          success: false,
-          error: err
-        });
-      } else {
-        res.json({
-          sucess: true,
-          documents: docs
-        });
-      }
+
+  Document.find().exec((err, docs) => {
+    docs = docs.filter(doc => {
+      return doc.collaborators.includes(user._id);
     });
+    if (err) {
+      res.json({
+        success: false,
+        error: err
+      });
+    } else {
+      console.log(docs);
+      res.json({
+        success: true,
+        documents: docs
+      });
+    }
+  });
 });
 
 router.post("/newDocument", (req, res) => {
@@ -41,6 +43,7 @@ router.post("/newDocument", (req, res) => {
 
 router.post("/addDocument", async (req, res) => {
   try {
+    console.log("in wrong one");
     let doc = await Document.findOne({ title: req.body.title });
     const collabs = doc.collaborators;
     await Document.updateOne(
@@ -54,30 +57,41 @@ router.post("/addDocument", async (req, res) => {
     console.log(e);
     res.send(e);
   }
+});
 
-  //   Document.findOne({ title: req.body.title })
-  //     .then(doc => {
-  //       console.log(doc);
-  //       let collaborators = doc.collaborators;
-  //       collaborators = [...collaborators, req.user._id];
-  //       doc.collaborators = collaborators;
-  //     })
-  //     .catch(e => {
-  //       console.log(e0);
-  //     });
-  //   doc.save((err, doc) => {
-  //     if (err) {
-  //       res.json({
-  //         success: false,
-  //         error: err
-  //       });
-  //     } else {
-  //       res.json({
-  //         success: true,
-  //         document: doc
-  //       });
-  //     }
-  //   });
+router.post("/addDocumentById", async (req, res) => {
+  try {
+    console.log("ID", req.body.id);
+    console.log("pw", req.body.password);
+
+    let doc = await Document.findById(req.body.id);
+    console.log("doc", doc);
+    if (doc.password === req.body.password) {
+      const collabs = doc.collaborators;
+      await Document.updateOne(
+        { id: req.body.id },
+        { collaborators: [...collabs, req.user.id] }
+      );
+      doc.collaborators = [...collabs, req.user.id];
+      await doc.save();
+      res.send(doc);
+    } else {
+      res.json({ success: false, error: "No document found with the id and password" });
+    }
+  } catch (e) {
+    console.log(e);
+    res.send(e);
+  }
+});
+
+router.get("/editor/:id", async (req, res) => {
+  try {
+    let doc = await Document.findOneById(req.params.id);
+    res.json({ success: true, document: doc });
+  } catch (e) {
+    res.json({ success: false, error: e });
+    console.log(e);
+  }
 });
 
 module.exports = router;
