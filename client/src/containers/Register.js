@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 export default function Register() {
   // Registration states
@@ -24,7 +24,7 @@ export default function Register() {
   };
 
   // Handle Registration
-  const submitRegister = (e) => {
+  const submitRegister = e => {
     e.preventDefault();
     if (regUser.length === 0) {
       setErrorMsg("Please enter a valid username");
@@ -64,42 +64,48 @@ export default function Register() {
   }
   return (
     <>
-    <Navbar/>
-    <div className="main">
-      <p className="sign" style={{textAlign:"center"}}>Register</p>
-      <p style={{textAlign: "center", color:"red"}}>{errorMsg}</p>
-      <form class="form1">
-        <input
-          className="un "
-          type="text"
-          placeholder="username"
-          value={regUser}
-          onChange={e => handleRegUser(e)}
-        />
-        <input
-          type="password"
-          className="un"
-          placeholder="password"
-          value={regPass}
-          onChange={e => handleRegPass(e)}
-        />
-        <input
-          type="password"
-          className="un"
-          placeholder="verify password"
-          value={repeatPass}
-          onChange={e => handleRepeatPass(e)}
-        />
-        <br />
-        <button onClick={(e) => submitRegister(e)} className="submit">
-          Submit
-        </button>
-        <p className="forgot" style={{textAlign:"center"}}>
-          Already have an account?<Link to="/login"><strong><i> Login</i></strong></Link>
+      <Navbar />
+      <div className="main">
+        <p className="sign" style={{ textAlign: "center" }}>
+          Register
         </p>
-      </form>
-    </div>
+        <p style={{ textAlign: "center", color: "red" }}>{errorMsg}</p>
+        <form class="form1">
+          <input
+            className="un "
+            type="text"
+            placeholder="username"
+            value={regUser}
+            onChange={e => handleRegUser(e)}
+          />
+          <input
+            type="password"
+            className="un"
+            placeholder="password"
+            value={regPass}
+            onChange={e => handleRegPass(e)}
+          />
+          <input
+            type="password"
+            className="un"
+            placeholder="verify password"
+            value={repeatPass}
+            onChange={e => handleRepeatPass(e)}
+          />
+          <br />
+          <button onClick={e => submitRegister(e)} className="submit">
+            Submit
+          </button>
+          <p className="forgot" style={{ textAlign: "center" }}>
+            Already have an account?
+            <Link to="/login">
+              <strong>
+                <i> Login</i>
+              </strong>
+            </Link>
+          </p>
+        </form>
+      </div>
     </>
-    
   );
 }
