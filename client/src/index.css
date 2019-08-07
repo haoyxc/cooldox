@@ -73,6 +73,7 @@ form.form1 {
   font-size: 13px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   align-self: center;
+  text-align: center
 }
 
 .forgot {
@@ -115,4 +116,10 @@ a {
   .main {
     border-radius: 0px;
   }
+}
+
+.docList {
+  border: 2px solid slategray;
+  border-radius: 10px;
+
 }

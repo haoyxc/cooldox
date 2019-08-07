@@ -93,12 +93,14 @@ export default function UserPortal() {
         <div className="new-doc-container">
           <h2>Add a New Document</h2>
           <input
+          className="un"
             type="text"
             placeholder="document name.."
             value={docname}
             onChange={e => setDocname(e.target.value)}
           />
           <input
+          className="un"
             type="password"
             name=""
             id=""
@@ -113,12 +115,14 @@ export default function UserPortal() {
         <div className="add-doc-container">
           <h2>Find a document to Add</h2>
           <input
+          className="un"
             type="text"
             placeholder="document id to find.."
             value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
           <input
+          className="un"
             type="password"
             name=""
             id=""
@@ -131,13 +135,17 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
+      <div className="docList">
+      <h3>Your documents</h3>
       {!allDocuments.length ? (
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
-          return <h4>{doc.title}</h4>;
+          return <h5><Link to="/editor">{doc.title}</Link></h5>;
         })
       )} 
+      </div>
+      
     </div>
   );
 }
