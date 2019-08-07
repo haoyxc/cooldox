@@ -6,6 +6,8 @@ import { Redirect, Link } from "react-router-dom";
 export default function UserPortal() {
   const [docname, setDocname] = useState("");
   const [newDocPass, setNewDocPass] = useState("");
+
+  const [findDocId, setDocId] = useState("");
   const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
@@ -57,12 +59,13 @@ export default function UserPortal() {
   const handleAddDocument = async e => {
     e.preventDefault();
     console.log("in find doc to add");
-    console.log(findDocName);
+    // console.log(findDocId);
+    // console.log(findDocPass);
     try {
       let response = await axios.post(
-        "http://localhost:4000/addDocument",
+        "http://localhost:4000/addDocumentById",
         {
-          title: findDocName,
+          id: findDocId,
           password: findDocPass
         },
         {
@@ -107,8 +110,8 @@ export default function UserPortal() {
           <h2>Find a document to Add</h2>
           <input
             type="text"
-            placeholder="document name to find.."
-            onChange={e => setFindDocName(e.target.value)}
+            placeholder="document id to find.."
+            onChange={e => setDocId(e.target.value)}
           />
           <input
             type="password"
@@ -122,13 +125,18 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
+<<<<<<< HEAD
       {!allDocuments.length ? (
+=======
+      {/* {!allDocuments ? (
+>>>>>>> 11e6bce543b023394c9a28ae506872ddf51b4a66
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
+          console.log(allDocuments);
           return <h4>{doc.title}</h4>;
         })
-      )}
+      )} */}
     </div>
   );
 }
