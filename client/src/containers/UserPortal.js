@@ -94,31 +94,37 @@ export default function UserPortal() {
         <div className="new-doc-container">
           <h2>Add a New Document</h2>
           <input
+            className="un"
             type="text"
             placeholder="document name"
             value={docname}
             onChange={e => setDocname(e.target.value)}
           />
           <input
+            className="un"
             type="password"
             name=""
             placeholder="password"
             value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
           />
-          <button type="submit" onClick={e => handleNewDocument(e)}>
-            Add!
-          </button>
+          <p>
+            <button type="submit" onClick={e => handleNewDocument(e)}>
+              Add!
+            </button>
+          </p>
         </div>
         <div className="add-doc-container">
           <h2>Find a document to Add</h2>
           <input
+            className="un"
             type="text"
             placeholder="document id"
             value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
           <input
+            className="un"
             type="password"
             name=""
             id=""
@@ -126,12 +132,13 @@ export default function UserPortal() {
             value={findDocPass}
             onChange={e => setFindDocPass(e.target.value)}
           />
-          <button type="submit" onClick={e => handleAddDocument(e)}>
-            Find!
-          </button>
+          <p>
+            <button type="submit" onClick={e => handleAddDocument(e)}>
+              Find!
+            </button>
+          </p>
         </div>
       </div>
-
       <div className="docList">
         <h3>Your documents</h3>
         {!allDocuments.length ? (
@@ -140,7 +147,6 @@ export default function UserPortal() {
           allDocuments.map(doc => {
             return (
               <h5>
-                <Route path={`/editor/${doc._id}`} exact component={DocumentEditor}/>
                 <Link
                   to={{ pathname: `/editor/${doc._id}`, state: { docId: doc._id } }}
                   style={{ color: "#8c55aa" }}
@@ -153,7 +159,6 @@ export default function UserPortal() {
           })
         )}
       </div>
-
     </div>
   );
 }
