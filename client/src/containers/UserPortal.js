@@ -9,12 +9,22 @@ export default function UserPortal() {
   const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
-  const [allDocuments, setAllDocuments] = useState(null);
+  const [allDocuments, setAllDocuments] = useState([]);
 
-  const getPortals = async () => {
+  const getDocuments = async () => {
     try {
-      let response = await axios.get("/portals");
-      console.log(response);
+      let response = await axios.get("http://localhost:4000/portals",{
+        withCredentials: true
+      });
+      let content = response.data;
+      //console.log(response);
+      if(!content.success){
+        console.log('failed to get documents');
+      } else {
+        console.log('documnets', content.documents)
+        setAllDocuments(content.documents);
+        console.log('alldocs', allDocuments)
+      }
     } catch (e) {
       console.log(e);
     }
@@ -60,17 +70,17 @@ export default function UserPortal() {
         }
       );
       let docData = response.data;
-      console.log(response, "DOCDATA");
+      console.log(docData, "DOCDATA");
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    let portals = getPortals();
-    setAllDocuments(portals);
+    getDocuments();
     console.log(allDocuments);
-  }, [allDocuments]);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -112,7 +122,7 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
-      {!allDocuments ? (
+      {!allDocuments.length ? (
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
