@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import InlineButton from './InlineButton';
+import React from 'react';
 import fontSizes from './Containers/fontSizes';
 import DropdownButton from './DropdownButton';
 
@@ -21,7 +20,6 @@ function FontSizeControls(props) {
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					{fontSizes.map((type) => (
-            <>
 						<DropdownButton
 							className="fontsize-option dropdown-item"
 							key={type.label}
@@ -30,7 +28,6 @@ function FontSizeControls(props) {
 							onToggle={props.onToggle}
 							style={type.style}
 						/>
-            </>
           ))}
 				</div>
 			</div>
