@@ -70,7 +70,7 @@ export default function Register() {
           Register
         </p>
         <p style={{ textAlign: "center", color: "red" }}>{errorMsg}</p>
-        <form class="form1">
+        <form className="form1">
           <input
             className="un "
             type="text"
