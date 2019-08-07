@@ -138,12 +138,7 @@ export default function UserPortal() {
           return (
             <div className="portal-doc">
               <h4>{doc.title}</h4>
-              {/* <Redirect
-                to={{
-                  pathname: "/order",
-                  state: { id: "123" }
-                }}
-              /> */}
+              <Link to={`/editor/${doc._id}`}>Here</Link>
               <p>{doc._id}</p>
             </div>
           );

@@ -27,8 +27,8 @@ function App() {
         <Route path="/" exact component={Register} />
         <Route path="/login" exact component={Login} />
         <PrivateRoute path="/portal" exact component={UserPortal} />
-        <PrivateRoute path="/editor" exact component={DocumentEditor} />
         <PrivateRoute path="/editor/:id" exact component={DocumentEditor} />
+        <PrivateRoute path="/editor" exact component={DocumentEditor} />
       </Switch>
     </BrowserRouter>
   );
