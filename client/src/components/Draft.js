@@ -1,17 +1,5 @@
-
-import React, { useState, useEffect } from "react";
-import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from "draft-js";
-import { Redirect } from "react-router-dom";
-import ColorControls from "./ColorControls";
-import colorStyleMap from "./ColorContainer/colorStyleMap";
-import FontSizeControls from "./FontSizeControls";
-import MutationControls from "./MutationControls";
-import ListControls from "./ListControls";
-import Navbar from "./Navbar";
-
-
 import React from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import { Editor, EditorState, Modifier, RichUtils, convertToRaw } from 'draft-js';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
 import FontSizeControls from './FontSizeControls';
@@ -26,11 +14,13 @@ function Draft({ docId }) {
   const [fontSize, setFontSize] = React.useState("");
 
   const onSave = async function() {
+    const content = convertToRaw(editorState.getCurrentContent()).blocks[0].text;
+    console.log(content);
     try {
       const response = await axios.post(
         `http://localhost:4000/editor/${docId}/save`,
         {
-          content: editorState,
+          content: content,
           modifiedAt: new Date()
         },
         {
@@ -137,6 +127,7 @@ function Draft({ docId }) {
       </div>
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
       <ListControls editorState={editorState} onToggle={toggleBlockStyle} />
+      <button onClick={() => onSave()}>Save</button>
       <div className="RichEditor-editor">
         <Editor
           id="richEditor"
