@@ -27,7 +27,7 @@ export default function DocumentEditor({ match }) {
     <div>
       <Navbar />
       {document ? <Draft /> : <div>Document not found sorry dude</div>}
-      <Draft />
+      <Draft docId={match.params.id}/>
     </div>
   );
 }

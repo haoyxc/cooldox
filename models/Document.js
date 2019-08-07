@@ -24,6 +24,18 @@ const documentSchema = new mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: User
     }
+  ],
+  history: [
+    {
+      content: {
+        type: String,
+        required: true
+      },
+      modifiedAt: {
+        type: String,
+        required: true
+      }
+    }
   ]
 });
 
