@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Draft from "../components/Draft";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
-export default function DocumentEditor() {
+export default function DocumentEditor({ id }) {
+  const [document, setDocument] = useState(null);
+
+  const getDocument = async () => {
+    // const responseFetch = await fetch(`http://localhost:4000/editor/${id}`, {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   redirect: follow,
+    //   credentials: include
+    // });
+    const resp = await axios(`http://localhost:4000/editor/${id}`, {
+      withCredentials: true
+    });
+    console.log(resp.data);
+    // console.log(responseFetch, "FETCH");
+  };
+  useEffect(() => {
+    getDocument();
+  });
+
   return (
     <div>
       <Navbar />
-      <Draft />
+      {document ? <Draft id={id} /> : <div>Document not found sorry dude</div>}
     </div>
   );
 }
