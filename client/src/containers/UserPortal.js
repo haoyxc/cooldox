@@ -8,7 +8,6 @@ export default function UserPortal() {
   const [newDocPass, setNewDocPass] = useState("");
 
   const [findDocId, setDocId] = useState("");
-  const [findDocName, setFindDocName] = useState("");
   const [findDocPass, setFindDocPass] = useState("");
 
   const [allDocuments, setAllDocuments] = useState(null);
@@ -37,10 +36,13 @@ export default function UserPortal() {
           withCredentials: true
         }
       );
-      //   console.log("THIS IS RESPON", response);
-      //   console.log(response.data, "RESPONSE");
       let docData = response.data;
+      console.log(docData);
+      let document = docData.document;
+      let id = document._id;
       //   return <Redirect to="/editor" />;
+      setDocname("");
+      setNewDocPass("");
     } catch (e) {
       console.log(e);
     }
@@ -49,8 +51,6 @@ export default function UserPortal() {
   const handleAddDocument = async e => {
     e.preventDefault();
     console.log("in find doc to add");
-    // console.log(findDocId);
-    // console.log(findDocPass);
     try {
       let response = await axios.post(
         "http://localhost:4000/addDocumentById",
@@ -64,6 +64,8 @@ export default function UserPortal() {
       );
       let docData = response.data;
       console.log(docData, "DOCDATA");
+      setDocId("");
+      setFindDocPass("");
     } catch (e) {
       console.log(e);
     }
