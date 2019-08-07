@@ -33,7 +33,7 @@ function Draft({ docId }) {
       console.log(e);
     }
   };
-
+  
   const toggleInlineStyle = inlineStyle => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };

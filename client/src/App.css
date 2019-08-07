@@ -20,7 +20,7 @@
   font-family: "Georgia", serif;
   font-size: 14px;
   padding: 15px;
-  margin: 50px auto;
+  /* margin: 50px auto; */
   max-width: 70%;
 }
 
@@ -82,12 +82,12 @@
 }
 
 .RichEditor-styleButton:hover {
-  background: #EEE;
+  background: #eee;
 }
 
 .RichEditor-activeButton {
-  background: #8AB3ff;
-  color: #255ECC;
+  background: #8ab3ff;
+  color: #255ecc;
 }
 
 .color-controls {
@@ -96,7 +96,7 @@
 
 .paragraph-controls {
   display: inline-block;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .dropdown-menu.show {
@@ -116,7 +116,7 @@
 }
 
 .dropdown-selection:hover {
-  background: #EEE;
+  background: #eee;
 }
 
 .dropdown-selection-color {
@@ -136,14 +136,14 @@
 }
 
 .dropdown-btn {
-  padding: .3em;
+  padding: 0.3em;
   border-radius: 5px;
   background: transparent;
-  border: 0px solid #FFFFFF;
+  border: 0px solid #ffffff;
 }
 
 .dropdown-btn:hover {
-  background: #EEE;
+  background: #eee;
 }
 
 .align-btn {
@@ -156,7 +156,7 @@
 }
 
 .align-btn:hover {
-  background: #EEE;
+  background: #eee;
 }
 
 /* User portal CSS Start */
@@ -177,3 +177,11 @@
   border-radius: 10px;
 }
 /* User portal CSS End */
+
+/* Doc editor CSS begin */
+.doc-editor-container {
+  margin: 0 30px;
+  text-align: center;
+  margin: 50px auto;
+}
+/* Doc editor CSS End */
