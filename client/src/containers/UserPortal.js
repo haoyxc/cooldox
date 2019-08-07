@@ -132,7 +132,7 @@ export default function UserPortal() {
           console.log(allDocuments);
           return <h4>{doc.title}</h4>;
         })
-      )} */}
+      )} 
     </div>
   );
 }
