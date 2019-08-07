@@ -3,8 +3,8 @@ import Draft from "../components/Draft";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
-export default function DocumentEditor({ id }) {
-  const [document, setDocument] = useState(null);
+export default function DocumentEditor(props) {
+  // const [document, setDocument] = useState(null);
 
   //   const getDocument = async () => {
   //     const resp = await axios(`http://localhost:4000/editor/${id}`, {
@@ -20,7 +20,8 @@ export default function DocumentEditor({ id }) {
   return (
     <div>
       <Navbar />
-      {document ? <Draft id={id} /> : <div>Document not found sorry dude</div>}
+      {props.location.state.docId}
+      {/* {document ? <Draft id={id} /> : <div>Document not found sorry dude</div>} */}
       <Draft />
     </div>
   );
