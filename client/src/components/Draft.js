@@ -1,34 +1,11 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> b175fe2c7d8304c8e1833c3008383f2d7f8667d9
-import React, { useState, useEffect } from "react";
-import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from "draft-js";
-import { Redirect } from "react-router-dom";
+import React from "react";
+import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
 import ColorControls from "./ColorControls";
 import colorStyleMap from "./ColorContainer/colorStyleMap";
 import FontSizeControls from "./FontSizeControls";
 import MutationControls from "./MutationControls";
 import ListControls from "./ListControls";
-import Navbar from "./Navbar";
-<<<<<<< HEAD
-
-function Draft() {
-  const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
-  const [color, setColor] = React.useState("");
-  const [fontSize, setFontSize] = React.useState("");
-=======
-
-
-import React from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
-import ColorControls from './ColorControls';
-import colorStyleMap from './ColorContainer/colorStyleMap';
-import FontSizeControls from './FontSizeControls';
-import MutationControls from './MutationControls';
-import ListControls from './ListControls';
 import axios from "axios";
-
 
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
@@ -46,15 +23,14 @@ function Draft({ docId }) {
         {
           withCredentials: true
         }
-	  );
-	  let contentData = response.data
-	  console.log(contentData)
+      );
+      let contentData = response.data;
+      console.log(contentData);
     } catch (e) {
       console.log(e);
     }
   };
 
->>>>>>> b175fe2c7d8304c8e1833c3008383f2d7f8667d9
   const toggleInlineStyle = inlineStyle => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
@@ -99,15 +75,11 @@ function Draft({ docId }) {
       };
     }
     let selectWholeBlocks = selection.merge(changes);
-<<<<<<< HEAD
     let modifiedContent = Modifier.applyInlineStyle(
       currentContent,
       selectWholeBlocks,
       style
     );
-=======
-    let modifiedContent = Modifier.applyInlineStyle(currentContent, selectWholeBlocks, style);
->>>>>>> b175fe2c7d8304c8e1833c3008383f2d7f8667d9
     let finalContent = removeStyles.reduce(function(content, style) {
       return Modifier.removeInlineStyle(content, selectWholeBlocks, style);
     }, modifiedContent);
@@ -141,7 +113,6 @@ function Draft({ docId }) {
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
       <ColorControls editorState={editorState} onToggle={toggleColor} color={color} />
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
-<<<<<<< HEAD
       <FontSizeControls
         editorState={editorState}
         onToggle={toggleFontSize}
@@ -165,18 +136,6 @@ function Draft({ docId }) {
           className="align-btn"
           onClick={() => onAlignmentClick("right", ["left", "center"])}
         >
-=======
-      <FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize} />
-      <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
-      <div className="paragraph-controls">
-        <button className="align-btn" onClick={() => onAlignmentClick("left", ["right", "center"])}>
-          <i className="fa fa-align-left" />
-        </button>
-        <button className="align-btn" onClick={() => onAlignmentClick("center", ["right", "left"])}>
-          <i className="fa fa-align-center" />
-        </button>
-        <button className="align-btn" onClick={() => onAlignmentClick("right", ["left", "center"])}>
->>>>>>> b175fe2c7d8304c8e1833c3008383f2d7f8667d9
           <i className="fa fa-align-right" />
         </button>
       </div>

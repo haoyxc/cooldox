@@ -6,8 +6,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .main {
@@ -45,6 +44,7 @@ code {
   margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
   align-self: center;
+  background-color: #fff;
 }
 
 form.form1 {
@@ -90,7 +90,7 @@ a {
 .titleName {
   text-align: center;
   font-size: 30px;
-  font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
 }
 
 .filler {
@@ -122,24 +122,23 @@ a {
   border-radius: 10px;
   margin: 5% 10%;
   padding: 2% 2%;
-
 }
 
-.portal-content{
+.portal-content {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
-.new-doc-container{
+.new-doc-container {
   flex: 1;
   display: flex;
   justify-content: center;
-  flex-direction: column
+  flex-direction: column;
 }
 
-.add-doc-container{
+.add-doc-container {
   flex: 1;
   display: flex;
   justify-content: center;
-  flex-direction: column
+  flex-direction: column;
 }
