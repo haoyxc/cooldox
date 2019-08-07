@@ -14,13 +14,13 @@ export default function UserPortal() {
 
   const getDocuments = async () => {
     try {
-      let response = await axios.get("http://localhost:4000/portals",{
+      let response = await axios.get("http://localhost:4000/portals", {
         withCredentials: true
       });
       let content = response.data;
       //console.log(response);
-      if(!content.success){
-        console.log('failed to get documents');
+      if (!content.success) {
+        console.log("failed to get documents");
       } else {
         setAllDocuments(content.documents);
       }
@@ -84,7 +84,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     getDocuments();
-  }, [allDocuments,docname,newDocPass]);
+  }, [allDocuments, docname, newDocPass]);
 
   return (
     <div>
@@ -135,9 +135,15 @@ export default function UserPortal() {
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
-          return <h4>{doc.title}</h4>;
+          return (
+            <div className="portal-doc">
+              <h4>{doc.title}</h4>
+
+              <p>{doc._id}</p>
+            </div>
+          );
         })
-      )} 
+      )}
     </div>
   );
 }
