@@ -125,11 +125,7 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
-<<<<<<< HEAD
       {!allDocuments.length ? (
-=======
-      {/* {!allDocuments ? (
->>>>>>> 11e6bce543b023394c9a28ae506872ddf51b4a66
         <div>No Documents! yet!!</div>
       ) : (
         allDocuments.map(doc => {
