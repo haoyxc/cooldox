@@ -1,12 +1,11 @@
-import React from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
-import ColorControls from './ColorControls';
-import colorStyleMap from './ColorContainer/colorStyleMap';
-import FontSizeControls from './FontSizeControls';
-import MutationControls from './MutationControls';
-import ListControls from './ListControls';
+import React from "react";
+import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
+import ColorControls from "./ColorControls";
+import colorStyleMap from "./ColorContainer/colorStyleMap";
+import FontSizeControls from "./FontSizeControls";
+import MutationControls from "./MutationControls";
+import ListControls from "./ListControls";
 import axios from "axios";
-
 
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
@@ -24,9 +23,9 @@ function Draft({ docId }) {
         {
           withCredentials: true
         }
-	  );
-	  let contentData = response.data
-	  console.log(contentData)
+      );
+      let contentData = response.data;
+      console.log(contentData);
     } catch (e) {
       console.log(e);
     }
@@ -77,6 +76,8 @@ function Draft({ docId }) {
     }
     let selectWholeBlocks = selection.merge(changes);
     let modifiedContent = Modifier.applyInlineStyle(currentContent, selectWholeBlocks, style);
+
+
     let finalContent = removeStyles.reduce(function(content, style) {
       return Modifier.removeInlineStyle(content, selectWholeBlocks, style);
     }, modifiedContent);
