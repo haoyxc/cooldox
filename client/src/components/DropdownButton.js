@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
 
-class InlineButton extends React.Component {
+class DropdownButton extends React.Component {
     constructor() {
       super();
       this.onToggle = (e) => {
@@ -10,16 +10,12 @@ class InlineButton extends React.Component {
       };
     }
     render() {
-      let className = 'RichEditor-styleButton';
-      if (this.props.active) {
-        className += ' RichEditor-activeButton';
-      }
       return (
-        <span id = "RichEditor" className={className} onMouseDown={this.onToggle}>
+        <span id = "RichEditor" className='dropdown-selection' onMouseDown={this.onToggle}>
           {this.props.label}
         </span>
       );
     }
   }
 
-  export default InlineButton;
+  export default DropdownButton;

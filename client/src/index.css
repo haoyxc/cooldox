@@ -116,3 +116,30 @@ a {
     border-radius: 0px;
   }
 }
+
+.docList {
+  border: 2px solid slategray;
+  border-radius: 10px;
+  margin: 5% 10%;
+  padding: 2% 2%;
+
+}
+
+.portal-content{
+  display: flex;
+  justify-content: center
+}
+
+.new-doc-container{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column
+}
+
+.add-doc-container{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column
+}

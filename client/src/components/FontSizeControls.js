@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InlineButton from './InlineButton';
 import fontSizes from './Containers/fontSizes';
+import DropdownButton from './DropdownButton';
 
 function FontSizeControls(props) {
 	const currentStyle = props.editorState.getCurrentInlineStyle();
@@ -9,7 +10,7 @@ function FontSizeControls(props) {
 		<div className="RichEditor-controls">
 			<div className="dropdown show">
 				<button
-					className="btn btn-secondary dropdown-toggle"
+					className="dropdown-btn dropdown-toggle"
 					type="button"
 					id="dropdownMenuButton"
 					data-toggle="dropdown"
@@ -21,7 +22,7 @@ function FontSizeControls(props) {
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					{fontSizes.map((type) => (
             <>
-						<InlineButton
+						<DropdownButton
 							className="fontsize-option dropdown-item"
 							key={type.label}
 							active={currentStyle.has(type.style)}
@@ -29,7 +30,6 @@ function FontSizeControls(props) {
 							onToggle={props.onToggle}
 							style={type.style}
 						/>
-            <div class="dropdown-divider"></div>
             </>
           ))}
 				</div>

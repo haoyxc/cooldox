@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InlineButton from './InlineButton';
 import COLORS from './Containers/Colors';
+import DropdownColorButton from './DropdownColorButton';
 
 function ColorControls(props) {
 	const currentStyle = props.editorState.getCurrentInlineStyle();
@@ -10,24 +11,26 @@ function ColorControls(props) {
 			<div className="RichEditor-controls">
 				<div className="dropdown show">
 					<button
-						className="btn btn-secondary dropdown-toggle"
+						className="dropdown-btn dropdown-toggle"
 						type="button"
 						id="dropdownMenuButton"
 						data-toggle="dropdown"
 						aria-haspopup="true"
-						aria-expanded="false"
+            aria-expanded="false"
+            style = {{color: props.color}}
 					>
 						{props.color || "black"}
 					</button>
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{COLORS.map((type) => (
-							<InlineButton
+							<DropdownColorButton
 								className="color-option"
 								key={type.label}
 								active={currentStyle.has(type.style)}
 								label={type.label}
 								onToggle={props.onToggle}
-								style={type.style}
+                style={type.style}
+                color={props.color}
 							/>
 						))}
 					</div>
