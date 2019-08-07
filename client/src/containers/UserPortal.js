@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import { Redirect, Link , Route} from "react-router-dom";
+import { Redirect, Link, Route } from "react-router-dom";
 import DocumentEditor from "./DocumentEditor";
 
 export default function UserPortal() {
