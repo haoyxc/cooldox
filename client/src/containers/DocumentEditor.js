@@ -7,6 +7,7 @@ import axios from "axios";
 export default function DocumentEditor({ match }) {
   //   const [docId, setDocId] = useState("");
   const [document, setDocument] = useState(null);
+  //   const socket = io("localhost:4000");
 
   useEffect(() => {
     // console.log(id);
