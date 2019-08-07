@@ -83,14 +83,29 @@ router.post("/addDocumentById", async (req, res) => {
   }
 });
 
-router.get("/editor/:id", async (req, res) => {
+router.post("/getEditor", async (req, res) => {
+  console.log(req.body.id, "ID CONSOLE LOG");
   try {
-    let doc = await Document.findOneById(req.params.id);
+    let doc = await Document.findById(req.body.id);
     res.json({ success: true, document: doc });
+  } catch (e) {
+    res.json({ success: false, error: e });
+    console.log(e, "THIS THE ERROR");
+  }
+});
+
+router.post("/editor/:id/save", async (req, res) => {
+  try {
+    let doc = await Document.findOneById(req.params.id)
+    doc.history.push({content: req.body.content, modifiedAt: req.body.modifiedAt})
+    await doc.save();
+    res.json({
+      success: true,
+    })
   } catch (e) {
     res.json({ success: false, error: e });
     console.log(e);
   }
-});
+})
 
 module.exports = router;
