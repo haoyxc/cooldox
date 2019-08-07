@@ -18,7 +18,6 @@ router.get("/portals", (req, res) => {
         error: err
       });
     } else {
-      console.log(docs);
       res.json({
         success: true,
         documents: docs

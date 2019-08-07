@@ -41,7 +41,6 @@ export default function Login() {
       })
     });
     const content = await response.json();
-    console.log(content);
     if (!content.success) {
       setErrorMsg("Wrong username or password");
     } else {
