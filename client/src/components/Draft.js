@@ -93,13 +93,13 @@ function Draft() {
       <FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize}/>
       <span style={{borderLeft: "1px solid grey", marginRight: "3px"}}></span>
       <div className="paragraph-controls">
-				<button onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
+				<button className="align-btn" onClick={() => onAlignmentClick('left', [ 'right', 'center' ])}>
 					<i className="fa fa-align-left" />
 				</button>
-				<button onClick={() => onAlignmentClick('center', [ 'right', 'left' ])}>
+				<button className="align-btn" onClick={() => onAlignmentClick('center', [ 'right', 'left' ])}>
 					<i className="fa fa-align-center" />
 				</button>
-				<button onClick={() => onAlignmentClick('right', [ 'left', 'center' ])}>
+				<button className="align-btn" onClick={() => onAlignmentClick('right', [ 'left', 'center' ])}>
 					<i className="fa fa-align-right" />
 				</button>
 			</div>

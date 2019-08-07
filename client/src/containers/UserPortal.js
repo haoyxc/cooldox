@@ -94,7 +94,7 @@ export default function UserPortal() {
           <h2>Add a New Document</h2>
           <input
             type="text"
-            placeholder="document name.."
+            placeholder="document name"
             value={docname}
             onChange={e => setDocname(e.target.value)}
           />
@@ -102,7 +102,7 @@ export default function UserPortal() {
             type="password"
             name=""
             id=""
-            placeholder="set document password"
+            placeholder="password"
             value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
           />
@@ -114,7 +114,7 @@ export default function UserPortal() {
           <h2>Find a document to Add</h2>
           <input
             type="text"
-            placeholder="document id to find.."
+            placeholder="document id"
             value={findDocId}
             onChange={e => setDocId(e.target.value)}
           />
@@ -122,7 +122,7 @@ export default function UserPortal() {
             type="password"
             name=""
             id=""
-            placeholder="password of target document.."
+            placeholder="password"
             value={findDocPass}
             onChange={e => setFindDocPass(e.target.value)}
           />
@@ -131,19 +131,22 @@ export default function UserPortal() {
           </button>
         </div>
       </div>
-      {!allDocuments.length ? (
-        <div>No Documents! yet!!</div>
-      ) : (
-        allDocuments.map(doc => {
-          return (
-            <div className="portal-doc">
-              <h4>{doc.title}</h4>
-              <Link to={`/editor/${doc._id}`}>Here</Link>
-              <p>{doc._id}</p>
-            </div>
-          );
-        })
-      )}
+
+      <div className="docList">
+        <h3>Your documents</h3>
+        {!allDocuments.length ? (
+          <div>No Documents! yet!!</div>
+        ) : (
+          allDocuments.map(doc => {
+            return (
+              <h5>
+                <Link to="/editor" style={{color: "#8c55aa"}}>{doc.title}</Link>
+              </h5>
+            );
+          })
+        )}
+      </div>
+
     </div>
   );
 }
