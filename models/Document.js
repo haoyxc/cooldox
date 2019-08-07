@@ -15,10 +15,6 @@ const documentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
-      type: String,
-      required: true
-  },
   content: {
     type: String,
     default: ""

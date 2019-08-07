@@ -7,22 +7,41 @@ const Document = require("../models/Document");
 // all routes after login
 router.get("/portals", (req, res) => {
   const user = req.user;
-  Document.find()
-    .populate("User")
-    .find({ collaborators: { $elemMatch: { _id: user._id } } })
-    .exec((err, docs) => {
-      if (err) {
-        res.json({
-          success: false,
-          error: err
-        });
-      } else {
-        res.json({
-          sucess: true,
-          documents: docs
-        });
-      }
+
+  Document.find().exec((err, docs) => {
+    docs = docs.filter(doc => {
+      return doc.collaborators.includes(user._id);
     });
+    if (err) {
+      res.json({
+        success: false,
+        error: err
+      });
+    } else {
+      console.log(docs);
+      res.json({
+        success: true,
+        documents: docs
+      });
+    }
+  });
+
+  //   Document.find()
+  //     .populate("User")
+  //     .find({ collaborators: { $elemMatch: { _id: user._id } } })
+  //     .exec((err, docs) => {
+  //       if (err) {
+  //         res.json({
+  //           success: false,
+  //           error: err
+  //         });
+  //       } else {
+  //         res.json({
+  //           success: true,
+  //           documents: docs
+  //         });
+  //       }
+  //     });
 });
 
 router.post("/newDocument", (req, res) => {
