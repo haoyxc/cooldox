@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link , Route} from "react-router-dom";
+import DocumentEditor from "./DocumentEditor";
 
 export default function UserPortal() {
   const [docname, setDocname] = useState("");
@@ -101,7 +102,6 @@ export default function UserPortal() {
           <input
             type="password"
             name=""
-            id=""
             placeholder="password"
             value={newDocPass}
             onChange={e => setNewDocPass(e.target.value)}
@@ -140,7 +140,14 @@ export default function UserPortal() {
           allDocuments.map(doc => {
             return (
               <h5>
-                <Link to="/editor" style={{color: "#8c55aa"}}>{doc.title}</Link>
+                <Route path={`/editor/${doc._id}`} exact component={DocumentEditor}/>
+                <Link
+                  to={{ pathname: `/editor/${doc._id}`, state: { docId: doc._id } }}
+                  style={{ color: "#8c55aa" }}
+                  exact
+                >
+                  {doc.title}
+                </Link>
               </h5>
             );
           })

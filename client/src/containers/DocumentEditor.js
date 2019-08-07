@@ -4,6 +4,7 @@ import Draft from "../components/Draft";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
+
 export default function DocumentEditor({ match }) {
   const [document, setDocument] = useState(null);
   useEffect(() => {
