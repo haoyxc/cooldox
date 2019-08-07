@@ -25,23 +25,6 @@ router.get("/portals", (req, res) => {
       });
     }
   });
-
-  //   Document.find()
-  //     .populate("User")
-  //     .find({ collaborators: { $elemMatch: { _id: user._id } } })
-  //     .exec((err, docs) => {
-  //       if (err) {
-  //         res.json({
-  //           success: false,
-  //           error: err
-  //         });
-  //       } else {
-  //         res.json({
-  //           success: true,
-  //           documents: docs
-  //         });
-  //       }
-  //     });
 });
 
 router.post("/newDocument", (req, res) => {
