@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Editor, EditorState, Modifier, RichUtils, getDefaultKeyBinding } from "draft-js";
 import { Redirect } from "react-router-dom";
@@ -7,7 +8,17 @@ import FontSizeControls from "./FontSizeControls";
 import MutationControls from "./MutationControls";
 import ListControls from "./ListControls";
 import Navbar from "./Navbar";
+
+
+import React from 'react';
+import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import ColorControls from './ColorControls';
+import colorStyleMap from './ColorContainer/colorStyleMap';
+import FontSizeControls from './FontSizeControls';
+import MutationControls from './MutationControls';
+import ListControls from './ListControls';
 import axios from "axios";
+
 
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());

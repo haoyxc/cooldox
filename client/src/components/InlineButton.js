@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import React from 'react';
 
 class InlineButton extends React.Component {
     constructor() {
