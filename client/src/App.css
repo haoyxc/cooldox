@@ -146,6 +146,19 @@
   background: #EEE;
 }
 
+.align-btn {
+  background: transparent;
+  border: 0;
+  margin-left: 4px;
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 5px;
+}
+
+.align-btn:hover {
+  background: #EEE;
+}
+
 /* User portal CSS Start */
 .portal-content {
   margin: 20px;
