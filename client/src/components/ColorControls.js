@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import InlineButton from './InlineButton';
+import React from 'react';
 import COLORS from './Containers/Colors';
 import DropdownColorButton from './DropdownColorButton';
 

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Editor, EditorState, Modifier, RichUtils } from 'draft-js';
+import React from 'react';
 
 class DropdownButton extends React.Component {
     constructor() {

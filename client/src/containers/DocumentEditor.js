@@ -37,7 +37,7 @@ export default function DocumentEditor({ match }) {
       {document ? (
         <div className="doc-editor-container">
           <h3>{document.title}</h3>
-          <Draft document={document} />
+          <Draft document={document} docId={match.params.id} />
         </div>
       ) : (
         <div className="doc-editor-container">Document not found sorry dude</div>
