@@ -67,19 +67,27 @@
   margin-bottom: 5px;
   user-select: none;
   display: inline-block;
-  margin-right: .5em;
+  margin-right: 3px;
 }
 
 .RichEditor-styleButton {
   color: #000;
   cursor: pointer;
-  padding: 1px 0;
-  display: block;
-  margin-right: 1em;
+  text-align: center;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  margin-right: 1px;
+  border-radius: 5px;
+}
+
+.RichEditor-styleButton:hover {
+  background: #EEE;
 }
 
 .RichEditor-activeButton {
-  color: #5890ff;
+  background: #8AB3ff;
+  color: #255ECC;
 }
 
 .color-controls {
@@ -93,12 +101,51 @@
 
 .dropdown-menu.show {
   padding: 0;
-  min-width: 2em;
+  min-width: 6.1em;
+  max-width: 6.1em;
 }
 
-.dropdown-divider {
-  margin: 0;
+.Mutation-controls {
+  display: inline-block;
 }
+
+.dropdown-selection {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropdown-selection:hover {
+  background: #EEE;
+}
+
+.dropdown-selection-color {
+  height: 15px;
+  width: 15px;
+  border-radius: 15px;
+  margin: 2px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.dropdown-selection-color:hover {
+  border: 1px solid dodgerblue;
+  outline: none;
+  box-shadow: 0 0 2px dodgerblue;
+  cursor: pointer;
+}
+
+.dropdown-btn {
+  padding: .3em;
+  border-radius: 5px;
+  background: transparent;
+  border: 0px solid #FFFFFF;
+}
+
+.dropdown-btn:hover {
+  background: #EEE;
+}
+
 /* User portal CSS Start */
 .portal-content {
   margin: 20px;

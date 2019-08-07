@@ -6,7 +6,7 @@ function FontSizeControls(props) {
     const currentStyle = props.editorState.getCurrentInlineStyle();
 
     return (
-    <div className="RichEditor-controls Mutation-controls">
+    <div className="Mutation-controls">
         {MutationStyles.map((type) =>
               <InlineButton
                 key={type.label}
