@@ -7,7 +7,6 @@ import MutationControls from './MutationControls';
 import ListControls from './ListControls';
 import axios from "axios";
 
-
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   const [color, setColor] = React.useState("");
@@ -26,9 +25,9 @@ function Draft({ docId }) {
         {
           withCredentials: true
         }
-	  );
-	  let contentData = response.data
-	  console.log(contentData)
+      );
+      let contentData = response.data;
+      console.log(contentData);
     } catch (e) {
       console.log(e);
     }
@@ -88,7 +87,11 @@ function Draft({ docId }) {
       };
     }
     let selectWholeBlocks = selection.merge(changes);
-    let modifiedContent = Modifier.applyInlineStyle(currentContent, selectWholeBlocks, style);
+    let modifiedContent = Modifier.applyInlineStyle(
+      currentContent,
+      selectWholeBlocks,
+      style
+    );
     let finalContent = removeStyles.reduce(function(content, style) {
       return Modifier.removeInlineStyle(content, selectWholeBlocks, style);
     }, modifiedContent);
@@ -122,16 +125,29 @@ function Draft({ docId }) {
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
       <ColorControls editorState={editorState} onToggle={toggleColor} color={color} />
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
-      <FontSizeControls editorState={editorState} onToggle={toggleFontSize} fontSize={fontSize} />
+      <FontSizeControls
+        editorState={editorState}
+        onToggle={toggleFontSize}
+        fontSize={fontSize}
+      />
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
       <div className="paragraph-controls">
-        <button className="align-btn" onClick={() => onAlignmentClick("left", ["right", "center"])}>
+        <button
+          className="align-btn"
+          onClick={() => onAlignmentClick("left", ["right", "center"])}
+        >
           <i className="fa fa-align-left" />
         </button>
-        <button className="align-btn" onClick={() => onAlignmentClick("center", ["right", "left"])}>
+        <button
+          className="align-btn"
+          onClick={() => onAlignmentClick("center", ["right", "left"])}
+        >
           <i className="fa fa-align-center" />
         </button>
-        <button className="align-btn" onClick={() => onAlignmentClick("right", ["left", "center"])}>
+        <button
+          className="align-btn"
+          onClick={() => onAlignmentClick("right", ["left", "center"])}
+        >
           <i className="fa fa-align-right" />
         </button>
       </div>

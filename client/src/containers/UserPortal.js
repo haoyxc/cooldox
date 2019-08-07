@@ -85,7 +85,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     getDocuments();
-  }, [allDocuments, docname, newDocPass]);
+  }, [allDocuments, docname, newDocPass, findDocId, findDocPass]);
 
   return (
     <div>
