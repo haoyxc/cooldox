@@ -26,16 +26,14 @@ io.on("connection", socket => {
   // here you can start emitting events to the client
   let docId;
   socket.on("docId", id => {
-    console.log("test");
     docId = id;
+    console.log("doc id", docId)
     socket.join(docId);
   });
 
-  socket.on("change_doc", ({ currContent, currSelect }) => {
-    // console.log(currContent);
-    console.log(socket.rooms);
-    // io.to(docId).broadcast("update_doc", currContent);
-    io.emit("update_doc", { currContent, currSelect });
+  socket.on("change_doc", (data) => {
+  console.log("data",data)
+    io.sockets.in(docId).emit("update_doc", data);
   });
 });
 

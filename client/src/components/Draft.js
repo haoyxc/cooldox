@@ -29,28 +29,23 @@ function Draft({ docId }) {
       socket.emit("docId", docId);
     });
 
-    // io.on("connection", socket => {
-
-    //   setSocket(socket);
-    //   socket.on()
-    //   // here you can start emitting events to the client
-    // });
   }, []);
 
-  socket.on("update_doc", ({ updatedContent, updatedSelect }) => {
-    // console.log("PLEASE WORK", updatedContent);
-    let currContent = EditorState.createWithContent(
-      convertFromRaw(JSON.parse(updatedContent))
+  socket.on("update_doc", ({ currContent, currSelect }) => {
+    console.log(currContent,currSelect)
+    let updateContent = EditorState.createWithContent(
+      convertFromRaw(JSON.parse(currContent))
     );
-    let currSelect = SelectionState.createEmpty();
-    currSelect = currSelect.merge(JSON.parse(updatedSelect));
-    setEditorState(EditorState.forceSelection(currContent, currSelect));
+    let updateSelect = SelectionState.createEmpty();
+    updateSelect = updateSelect.merge(JSON.parse(currSelect));
+    console.log(updateContent,updateSelect)
+    setEditorState(EditorState.forceSelection(updateContent, updateSelect));
   });
 
   const onChange = newEditorState => {
     const currContent = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
     const currSelect = JSON.stringify(newEditorState.getSelection());
-    // console.log("test", currContent);
+    // console.log(currContent, currSelect);
     socket.emit("change_doc", { currContent, currSelect });
     // setEditorState(newEditorState);
   };
