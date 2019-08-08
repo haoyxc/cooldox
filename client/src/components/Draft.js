@@ -6,6 +6,7 @@ import FontSizeControls from './FontSizeControls';
 import MutationControls from './MutationControls';
 import ListControls from './ListControls';
 import axios from "axios";
+import io from "socket.io-client";
 
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
@@ -15,6 +16,9 @@ function Draft({ docId }) {
   useEffect(() => {
     getSavedContent();
   }, [])
+  //   useEffect(() => {
+  //     io.on("UPDATE_DOC", data => {});
+  //   }, [editorState]);
 
   const onSave = async function() {
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
@@ -128,6 +132,17 @@ function Draft({ docId }) {
     }
     return `align-${alignment}`;
   };
+
+  const onChange = newEditorState => {
+    // console.log(
+    //   text
+    //     .getCurrentContent()
+    //     .getBlockMap()
+    //     .map(a => a.getText())
+    // );
+
+    setEditorState(newEditorState);
+  };
   //end of block alignment
 
   return (
@@ -172,7 +187,8 @@ function Draft({ docId }) {
           spellCheck={true}
           editorState={editorState}
           handleKeyCommand={handleKeyShortcut}
-          onChange={setEditorState}
+          //   onChange={() => handleEditorChange()}
+          onChange={onChange}
           blockStyleFn={getBlockStyle}
           ref={Editor => Editor && Editor.focus()}
         />
