@@ -22,12 +22,24 @@ let app = express();
 const server = require("http").Server(app);
 const io = socket(server);
 
-io.on("connection", client => {
+io.on("connection", socket => {
   // here you can start emitting events to the client
-  socket.on("UPDATE_DOC", data => {});
+  let docId;
+  socket.on("docId", id => {
+    console.log("test");
+    docId = id;
+    socket.join(docId);
+  });
+
+  socket.on("change_doc", ({ currContent, currSelect }) => {
+    // console.log(currContent);
+    console.log(socket.rooms);
+    // io.to(docId).broadcast("update_doc", currContent);
+    io.emit("update_doc", { currContent, currSelect });
+  });
 });
 
-// static
+// staticd
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.static(path.join(__dirname, "build")));
 app.use(bodyParser.json());
