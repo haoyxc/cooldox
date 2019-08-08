@@ -24,6 +24,7 @@ function Draft({ docId }) {
   const [fontSize, setFontSize] = React.useState("");
 
   useEffect(() => {
+    getSavedContent();
     socket.on("connect", () => {
       socket.emit("docId", docId);
     });
@@ -55,11 +56,12 @@ function Draft({ docId }) {
   };
 
   const onSave = async function() {
+    const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     try {
       const response = await axios.post(
         `http://localhost:4000/editor/${docId}/save`,
         {
-          content: editorState,
+          content: content,
           modifiedAt: new Date()
         },
         {
@@ -68,6 +70,25 @@ function Draft({ docId }) {
       );
       let contentData = response.data;
       console.log(contentData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getSavedContent = async function() {
+    try {
+      const content = await axios.get(`http://localhost:4000/editor/${docId}/save`, {
+        withCredentials: true
+      });
+      console.log(content);
+      if (content.data.success) {
+        console.log(convertFromRaw(JSON.parse(content.data.latestDoc.content)));
+        setEditorState(
+          EditorState.createWithContent(
+            convertFromRaw(JSON.parse(content.data.latestDoc.content))
+          )
+        );
+      }
     } catch (e) {
       console.log(e);
     }
@@ -184,6 +205,7 @@ function Draft({ docId }) {
       </div>
       <span style={{ borderLeft: "1px solid grey", marginRight: "3px" }} />
       <ListControls editorState={editorState} onToggle={toggleBlockStyle} />
+      <button onClick={() => onSave()}>Save</button>
       <div className="RichEditor-editor">
         <Editor
           id="richEditor"
