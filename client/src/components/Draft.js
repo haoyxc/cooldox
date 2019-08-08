@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
+import {
+  Editor,
+  EditorState,
+  Modifier,
+  RichUtils,
+  convertToRaw,
+  convertFromRaw,
+  SelectionState
+} from "draft-js";
 import ColorControls from "./ColorControls";
 import colorStyleMap from "./ColorContainer/colorStyleMap";
 import FontSizeControls from "./FontSizeControls";
@@ -8,14 +16,43 @@ import ListControls from "./ListControls";
 import axios from "axios";
 import io from "socket.io-client";
 
+const socket = io("http://localhost:4000");
+
 function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   const [color, setColor] = React.useState("");
   const [fontSize, setFontSize] = React.useState("");
 
-  //   useEffect(() => {
-  //     io.on("UPDATE_DOC", data => {});
-  //   }, [editorState]);
+  useEffect(() => {
+    socket.on("connect", () => {
+      socket.emit("docId", docId);
+    });
+
+    // io.on("connection", socket => {
+
+    //   setSocket(socket);
+    //   socket.on()
+    //   // here you can start emitting events to the client
+    // });
+  }, []);
+
+  socket.on("update_doc", ({ updatedContent, updatedSelect }) => {
+    // console.log("PLEASE WORK", updatedContent);
+    let currContent = EditorState.createWithContent(
+      convertFromRaw(JSON.parse(updatedContent))
+    );
+    let currSelect = SelectionState.createEmpty();
+    currSelect = currSelect.merge(JSON.parse(updatedSelect));
+    setEditorState(EditorState.forceSelection(currContent, currSelect));
+  });
+
+  const onChange = newEditorState => {
+    const currContent = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
+    const currSelect = JSON.stringify(newEditorState.getSelection());
+    // console.log("test", currContent);
+    socket.emit("change_doc", { currContent, currSelect });
+    // setEditorState(newEditorState);
+  };
 
   const onSave = async function() {
     try {
@@ -111,16 +148,6 @@ function Draft({ docId }) {
     return `align-${alignment}`;
   };
 
-  const onChange = newEditorState => {
-    // console.log(
-    //   text
-    //     .getCurrentContent()
-    //     .getBlockMap()
-    //     .map(a => a.getText())
-    // );
-
-    setEditorState(newEditorState);
-  };
   //end of block alignment
 
   return (
@@ -167,7 +194,7 @@ function Draft({ docId }) {
           //   onChange={() => handleEditorChange()}
           onChange={onChange}
           blockStyleFn={getBlockStyle}
-          ref={Editor => Editor && Editor.focus()}
+          //   ref={Editor => Editor && Editor.focus()}
         />
       </div>
     </div>
