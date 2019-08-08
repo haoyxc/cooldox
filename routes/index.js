@@ -114,7 +114,7 @@ router.post("/editor/:id/save", async (req, res) => {
 router.get("/editor/:id/save", async (req, res) => {
   try {
     let doc = await Document.findById(req.params.id)
-    const latestDoc = doc.history[history.length - 1]
+    const latestDoc = doc.history[doc.history.length - 1]
     res.json({
       success: true,
       latestDoc,
