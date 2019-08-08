@@ -1,5 +1,5 @@
-import React from 'react';
-import { Editor, EditorState, Modifier, RichUtils, convertToRaw } from 'draft-js';
+import React, {useEffect} from 'react';
+import { Editor, EditorState, Modifier, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 import ColorControls from './ColorControls';
 import colorStyleMap from './ColorContainer/colorStyleMap';
 import FontSizeControls from './FontSizeControls';
@@ -11,6 +11,10 @@ function Draft({ docId }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   const [color, setColor] = React.useState("");
   const [fontSize, setFontSize] = React.useState("");
+
+  useEffect(() => {
+    getSavedContent();
+  }, [])
 
   const onSave = async function() {
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
@@ -32,15 +36,23 @@ function Draft({ docId }) {
     }
   };
 
-  // const getSavedContent = async function() {
-  //   try {
-  //     const content = await axios.get(
-  //       `http://localhost:4000/editor/${docId}/save`,
-  //     )
-  //   } catch(e) {
-  //     console.log(e);
-  //   }
-  // }
+  const getSavedContent = async function() {
+    try {
+      const content = await axios.get(
+        `http://localhost:4000/editor/${docId}/save`,
+        {
+          withCredentials: true
+        }
+      );
+      console.log(content);
+      if (content.data.success) {
+        console.log(convertFromRaw(JSON.parse(content.data.latestDoc.content)))
+        setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content.data.latestDoc.content))));
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  }
 
   const toggleInlineStyle = inlineStyle => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
