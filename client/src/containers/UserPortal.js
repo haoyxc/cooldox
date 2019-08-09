@@ -55,6 +55,7 @@ export default function UserPortal() {
       //   return <Redirect to="/editor" />;
       setDocname("");
       setNewDocPass("");
+      getDocuments();
     } catch (e) {
       console.log(e);
     }
@@ -78,6 +79,7 @@ export default function UserPortal() {
       console.log(docData, "DOCDATA");
       setDocId("");
       setFindDocPass("");
+      getDocuments();
     } catch (e) {
       console.log(e);
     }
@@ -85,7 +87,7 @@ export default function UserPortal() {
 
   useEffect(() => {
     getDocuments();
-  }, [allDocuments, docname, newDocPass, findDocId, findDocPass]);
+  }, []);
 
   return (
     <div>

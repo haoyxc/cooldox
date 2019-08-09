@@ -3,14 +3,17 @@ import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import Draft from "../components/Draft";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import io from "socket.io-client";
 
 export default function DocumentEditor({ match }) {
   //   const [docId, setDocId] = useState("");
   const [document, setDocument] = useState(null);
+  const [socket, setSocket] = useState(null);
   //   const socket = io("localhost:4000");
 
   useEffect(() => {
     // console.log(id);
+    setSocket(io("http://localhost:4000"));
     getDocument();
   }, []);
 
@@ -24,12 +27,9 @@ export default function DocumentEditor({ match }) {
         withCredentials: true
       }
     );
-    // console.log(resp.data);
     if (resp.data.success) {
       setDocument(resp.data.document);
     }
-
-    // console.log(responseFetch, "FETCH");
   };
 
   return (
@@ -39,7 +39,7 @@ export default function DocumentEditor({ match }) {
         <div className="doc-editor-container">
           <h3>{document.title}</h3>
           <p>Shareable id: {match.params.id}</p>
-          <Draft document={document} docId={match.params.id} />
+          <Draft document={document} docId={match.params.id} socket={socket} />
         </div>
       ) : (
         <div className="doc-editor-container">Document not found sorry dude</div>
