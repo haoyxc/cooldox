@@ -39,8 +39,6 @@ function Draft({ docId, socket }) {
     }
   }, []);
 
-  
-
   const onChange = newEditorState => {
     console.log('socket' + socket);
     const currContent = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
