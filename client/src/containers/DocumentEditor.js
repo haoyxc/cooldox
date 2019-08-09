@@ -6,13 +6,11 @@ import axios from "axios";
 import io from "socket.io-client";
 
 export default function DocumentEditor({ match }) {
-  //   const [docId, setDocId] = useState("");
   const [document, setDocument] = useState(null);
   const [socket, setSocket] = useState(null);
-  //   const socket = io("localhost:4000");
+
 
   useEffect(() => {
-    // console.log(id);
     setSocket(io("http://localhost:4000"));
     getDocument();
   }, []);

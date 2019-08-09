@@ -6,12 +6,10 @@ const User = require("../models/User");
 module.exports = function(passport, hash) {
 
   router.post("/register", (req, res) => {
-    console.log(req.body);
     const newUser = new User({
       username: req.body.username,
       password: hash(req.body.password)
     });
-    console.log(newUser);
     newUser.save(function(err, result) {
       if (err) {
         res.json({ success: false, error: "Unable to save the user" });
@@ -25,7 +23,6 @@ module.exports = function(passport, hash) {
     passport.authenticate("local", {
       successRedirect: "/login/success",
       failureRedirect: "/login/failure"
-      // failureFlash: true
     })
   );
 

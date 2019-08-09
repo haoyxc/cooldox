@@ -23,7 +23,6 @@ function Draft({ docId, socket }) {
 
   useEffect(() => {
     getSavedContent();
-      console.log('docid: ', docId);
       socket.emit("docId", docId);
     socket.on("update_doc", ({ currContent, currSelect }) => {
       let updateContent = EditorState.createWithContent(
@@ -31,7 +30,6 @@ function Draft({ docId, socket }) {
       );
       let updateSelect = SelectionState.createEmpty();
       updateSelect = updateSelect.merge(JSON.parse(currSelect));
-      console.log(updateContent,updateSelect)
       setEditorState(EditorState.forceSelection(updateContent, updateSelect));
     });
     return () => {
@@ -40,10 +38,8 @@ function Draft({ docId, socket }) {
   }, []);
 
   const onChange = newEditorState => {
-    console.log('socket' + socket);
     const currContent = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
     const currSelect = JSON.stringify(newEditorState.getSelection());
-    // console.log(currContent, currSelect);
     socket.emit("change_doc", { currContent, currSelect });
   };
 
@@ -61,7 +57,6 @@ function Draft({ docId, socket }) {
         }
       );
       let contentData = response.data;
-      console.log(contentData);
     } catch (e) {
       console.log(e);
     }
@@ -72,9 +67,7 @@ function Draft({ docId, socket }) {
       const content = await axios.get(`http://localhost:4000/editor/${docId}/save`, {
         withCredentials: true
       });
-      console.log(content);
       if (content.data.success) {
-        console.log(convertFromRaw(JSON.parse(content.data.latestDoc.content)));
         setEditorState(
           EditorState.createWithContent(
             convertFromRaw(JSON.parse(content.data.latestDoc.content))
@@ -94,8 +87,6 @@ function Draft({ docId, socket }) {
   };
   const toggleColor = color => {
     setColor(color);
-    console.log(editorState);
-    console.log(RichUtils);
     setEditorState(RichUtils.toggleInlineStyle(editorState, color));
   };
   const toggleFontSize = fontSize => {
