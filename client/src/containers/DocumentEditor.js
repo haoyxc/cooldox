@@ -36,7 +36,14 @@ export default function DocumentEditor({ match }) {
       {document ? (
         <div className="doc-editor-container">
           <h3>{document.title}</h3>
-          <p>Shareable id: {match.params.id}</p>
+          <p>Shareable id: {match.params.id} <button
+            style={{marginLeft: 20}}
+            className="submit"
+          >
+            <Link 
+            style={{textDecoration: 'none', color: 'inherit'}}
+            to='/portal'>Back to Portal</Link>
+          </button></p>
           <Draft document={document} docId={match.params.id} socket={socket} />
         </div>
       ) : (
