@@ -36,9 +36,8 @@ export default function DocumentEditor({ match }) {
       {document ? (
         <div className="doc-editor-container">
           <h3>{document.title}</h3>
-          <Draft document={document} docId={match.params.id} socket={socket}/>
-          <p>Sharable id: {match.params.id}</p>
-
+          <p>Shareable id: {match.params.id}</p>
+          <Draft document={document} docId={match.params.id} socket={socket} />
         </div>
       ) : (
         <div className="doc-editor-container">Document not found sorry dude</div>
