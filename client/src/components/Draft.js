@@ -14,42 +14,37 @@ import FontSizeControls from "./FontSizeControls";
 import MutationControls from "./MutationControls";
 import ListControls from "./ListControls";
 import axios from "axios";
-import io from "socket.io-client";
 
-const socket = io("http://localhost:4000");
 
-function Draft({ docId }) {
+function Draft({ docId, socket }) {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   const [color, setColor] = React.useState("");
   const [fontSize, setFontSize] = React.useState("");
 
   useEffect(() => {
     getSavedContent();
-    socket.on("connect", () => {
+      console.log('docid: ', docId);
       socket.emit("docId", docId);
+    socket.on("update_doc", ({ currContent, currSelect }) => {
+      let updateContent = EditorState.createWithContent(
+        convertFromRaw(JSON.parse(currContent))
+      );
+      let updateSelect = SelectionState.createEmpty();
+      updateSelect = updateSelect.merge(JSON.parse(currSelect));
+      console.log(updateContent,updateSelect)
+      setEditorState(EditorState.forceSelection(updateContent, updateSelect));
     });
     return () => {
-      socket.close();
-    };
+      socket.emit("leave")
+    }
   }, []);
 
-  socket.on("update_doc", ({ currContent, currSelect }) => {
-    console.log(currContent, currSelect);
-    let updateContent = EditorState.createWithContent(
-      convertFromRaw(JSON.parse(currContent))
-    );
-    let updateSelect = SelectionState.createEmpty();
-    updateSelect = updateSelect.merge(JSON.parse(currSelect));
-    console.log(updateContent, updateSelect);
-    setEditorState(EditorState.forceSelection(updateContent, updateSelect));
-  });
-
   const onChange = newEditorState => {
+    console.log('socket' + socket);
     const currContent = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
     const currSelect = JSON.stringify(newEditorState.getSelection());
     // console.log(currContent, currSelect);
     socket.emit("change_doc", { currContent, currSelect });
-    // setEditorState(newEditorState);
   };
 
   const onSave = async function() {

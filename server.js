@@ -27,14 +27,20 @@ io.on("connection", socket => {
   let docId;
   socket.on("docId", id => {
     docId = id;
-    console.log("doc id", docId)
+    console.log("CRAZYYYYYY", docId);
     socket.join(docId);
   });
 
-  socket.on("change_doc", (data) => {
-  console.log("data",data)
-    io.sockets.in(docId).emit("update_doc", data);
+  socket.on("change_doc", data => {
+    // console.log("data", data);
+    console.log('docid: ', docId);
+    io.to(docId).emit("update_doc", data);
   });
+
+  socket.on("leave", () => {
+    console.log("leave room with id:", docId)
+    socket.leave(docId)
+  })
 });
 
 // staticd
@@ -85,7 +91,6 @@ passport.serializeUser(function(user, done) {
 // Passport Deserialize
 passport.deserializeUser(function(id, done) {
   User.findById(id, function(err, user) {
-    console.log(user);
     done(err, user);
   });
 });

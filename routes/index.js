@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const User = require("../models/User");
 const Document = require("../models/Document");
 
@@ -27,7 +26,6 @@ router.get("/portals", (req, res) => {
 });
 
 router.post("/newDocument", (req, res) => {
-  console.log("req", req);
   let newDoc = new Document({
     title: req.body.title,
     content: "",
@@ -84,7 +82,6 @@ router.post("/addDocumentById", async (req, res) => {
 });
 
 router.post("/getEditor", async (req, res) => {
-  console.log(req.body.id, "ID CONSOLE LOG");
   try {
     let doc = await Document.findById(req.body.id);
     res.json({ success: true, document: doc });
