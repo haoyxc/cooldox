@@ -28,17 +28,19 @@ function Draft({ docId }) {
     socket.on("connect", () => {
       socket.emit("docId", docId);
     });
-
+    return () => {
+      socket.close();
+    };
   }, []);
 
   socket.on("update_doc", ({ currContent, currSelect }) => {
-    console.log(currContent,currSelect)
+    console.log(currContent, currSelect);
     let updateContent = EditorState.createWithContent(
       convertFromRaw(JSON.parse(currContent))
     );
     let updateSelect = SelectionState.createEmpty();
     updateSelect = updateSelect.merge(JSON.parse(currSelect));
-    console.log(updateContent,updateSelect)
+    console.log(updateContent, updateSelect);
     setEditorState(EditorState.forceSelection(updateContent, updateSelect));
   });
 
