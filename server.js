@@ -27,13 +27,11 @@ io.on("connection", socket => {
   let docId;
   socket.on("docId", id => {
     docId = id;
-    console.log("CRAZYYYYYY", docId);
+    console.log("Joined room with docId:", docId);
     socket.join(docId);
   });
 
   socket.on("change_doc", data => {
-    // console.log("data", data);
-    console.log('docid: ', docId);
     io.to(docId).emit("update_doc", data);
   });
 
@@ -100,7 +98,6 @@ passport.use(
   new LocalStrategy(function(username, password, done) {
     const hashedPassword = hashPassword(password);
     User.findOne({ username: username }, function(err, user) {
-      console.log(user);
       if (err) {
         console.log("Incorrect Email");
         done(err);
@@ -150,9 +147,6 @@ app.use(function(err, req, res, next) {
     message: err.message
   });
 });
-
-// const port = process.env.PORT || 5000;
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 server.listen(4000, function() {
   console.log("server is running on port 4000");

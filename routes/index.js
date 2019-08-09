@@ -58,11 +58,7 @@ router.post("/addDocument", async (req, res) => {
 
 router.post("/addDocumentById", async (req, res) => {
   try {
-    console.log("ID", req.body.id);
-    console.log("pw", req.body.password);
-
     let doc = await Document.findById(req.body.id);
-    console.log("doc", doc);
     if (doc.password === req.body.password) {
       const collabs = doc.collaborators;
       await Document.updateOne(

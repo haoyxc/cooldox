@@ -19,7 +19,6 @@ export default function UserPortal() {
         withCredentials: true
       });
       let content = response.data;
-      //console.log(response);
       if (!content.success) {
         console.log("failed to get documents");
       } else {
@@ -32,8 +31,6 @@ export default function UserPortal() {
 
   const handleNewDocument = async e => {
     e.preventDefault();
-    console.log("in add doc");
-    console.log(docname, "DOCNAME");
     try {
       let response = await axios.post(
         "http://localhost:4000/newDocument",
@@ -49,10 +46,8 @@ export default function UserPortal() {
       setDocname("");
 
       let docData = response.data;
-      console.log(docData);
       let document = docData.document;
       let id = document._id;
-      //   return <Redirect to="/editor" />;
       setDocname("");
       setNewDocPass("");
       getDocuments();
@@ -63,7 +58,6 @@ export default function UserPortal() {
 
   const handleAddDocument = async e => {
     e.preventDefault();
-    console.log("in find doc to add");
     try {
       let response = await axios.post(
         "http://localhost:4000/addDocumentById",
@@ -75,8 +69,6 @@ export default function UserPortal() {
           withCredentials: true
         }
       );
-      let docData = response.data;
-      console.log(docData, "DOCDATA");
       setDocId("");
       setFindDocPass("");
       getDocuments();
