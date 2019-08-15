@@ -1,5 +1,5 @@
 # cooldox
-collaborative, real time text editor using draft.js and websockets 
+collaborative, real time text editor using draft.js, websockets, and electron. 
 
 ### preview:
 
