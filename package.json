@@ -34,7 +34,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "socket.io": "^2.2.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
